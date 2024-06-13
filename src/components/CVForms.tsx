@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import styles from "../styles/CVForms.module.css";
 import PersonalDataForm from "./PersonalDataForm";
+import OnlineProfilesForm from "./OnlineProfilesForm";
 
 type PersonalData = {
   name: string;
@@ -9,8 +10,15 @@ type PersonalData = {
   email: string;
 };
 
+type OnlineProfiles = {
+  portfolioURL: string;
+  gitHubUsername: string;
+  linkedInUsername: string;
+};
+
 export type CVData = {
   personalData: PersonalData;
+  onlineProfiles: OnlineProfiles;
 };
 
 export type CVAction =
@@ -29,10 +37,32 @@ export type CVAction =
   | {
       type: "SET_EMAIL";
       value: string;
+    }
+  | {
+      type: "SET_PORTFOLIO_URL";
+      value: string;
+    }
+  | {
+      type: "SET_GITHUB_USERNAME";
+      value: string;
+    }
+  | {
+      type: "SET_LINKEDIN_USERNAME";
+      value: string;
     };
 
 const INITIAL_CV: CVData = {
-  personalData: { name: "", location: "", phone: "", email: "" },
+  personalData: {
+    name: "",
+    location: "",
+    phone: "",
+    email: "",
+  },
+  onlineProfiles: {
+    portfolioURL: "",
+    gitHubUsername: "",
+    linkedInUsername: "",
+  },
 };
 
 function cvReducer(state: CVData, action: CVAction) {
@@ -57,6 +87,27 @@ function cvReducer(state: CVData, action: CVAction) {
         ...state,
         personalData: { ...state.personalData, email: action.value },
       };
+    case "SET_PORTFOLIO_URL":
+      return {
+        ...state,
+        onlineProfiles: { ...state.onlineProfiles, portfolioURL: action.value },
+      };
+    case "SET_GITHUB_USERNAME":
+      return {
+        ...state,
+        onlineProfiles: {
+          ...state.onlineProfiles,
+          gitHubUsername: action.value,
+        },
+      };
+    case "SET_LINKEDIN_USERNAME":
+      return {
+        ...state,
+        onlineProfiles: {
+          ...state.onlineProfiles,
+          linkedInUsername: action.value,
+        },
+      };
   }
 }
 
@@ -66,6 +117,7 @@ export default function CVForms() {
   return (
     <div className={styles.main}>
       <PersonalDataForm cvState={cvState} cvDispatch={cvDispatch} />
+      <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
     </div>
   );
 }
