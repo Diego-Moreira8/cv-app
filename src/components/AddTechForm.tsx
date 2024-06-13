@@ -1,12 +1,12 @@
 import { useState, useId } from "react";
-import { Tech, CVAction } from "./CVForms";
+import { CVData, CVAction } from "./CVForms";
 
 type AddTechFormProps = {
-  techs: Tech[];
+  cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function AddTechForm({ techs, cvDispatch }: AddTechFormProps) {
+export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
   const [inputError, setInputError] = useState("");
 
   const newTechInputId = useId();
@@ -26,7 +26,7 @@ export default function AddTechForm({ techs, cvDispatch }: AddTechFormProps) {
       return;
     }
 
-    const techAlreadyExists = techs.find((t) => t.name === techName);
+    const techAlreadyExists = cvState.techs.find((t) => t.name === techName);
 
     if (techAlreadyExists) {
       setInputError("Esta tecnologia já foi inserida.");

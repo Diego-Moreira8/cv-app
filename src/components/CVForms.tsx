@@ -19,7 +19,7 @@ type OnlineProfiles = {
   linkedInUsername: string;
 };
 
-export type Tech = { id: string; name: string };
+type Tech = { id: string; name: string };
 
 export type CVData = {
   personalData: PersonalData;

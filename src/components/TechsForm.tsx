@@ -8,11 +8,9 @@ type TechsFormProps = {
 };
 
 export default function TechsForm({ cvState, cvDispatch }: TechsFormProps) {
-  const { techs } = cvState;
-
   return (
     <Group title="Objetivo profissional">
-      <AddTechForm techs={techs} cvDispatch={cvDispatch} />
+      <AddTechForm cvState={cvState} cvDispatch={cvDispatch} />
     </Group>
   );
 }
