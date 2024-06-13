@@ -1,8 +1,10 @@
 import { useReducer } from "react";
+import { v4 as uuid } from "uuid";
 import styles from "../styles/CVForms.module.css";
 import PersonalDataForm from "./PersonalDataForm";
 import OnlineProfilesForm from "./OnlineProfilesForm";
 import ProfessionalObjectiveForm from "./ProfessionalObjectiveForm";
+import TechsForm from "./TechsForm";
 
 type PersonalData = {
   name: string;
@@ -17,10 +19,13 @@ type OnlineProfiles = {
   linkedInUsername: string;
 };
 
+export type Tech = { id: string; name: string };
+
 export type CVData = {
   personalData: PersonalData;
   onlineProfiles: OnlineProfiles;
   professionalObjective: string;
+  techs: Tech[];
 };
 
 export type CVAction =
@@ -55,6 +60,14 @@ export type CVAction =
   | {
       type: "SET_PROFESSIONAL_OBJECTIVE";
       value: string;
+    }
+  | {
+      type: "ADD_TECH";
+      value: string;
+    }
+  | {
+      type: "REMOVE_TECH_BY_ID";
+      value: string;
     };
 
 const INITIAL_CV: CVData = {
@@ -69,18 +82,9 @@ const INITIAL_CV: CVData = {
     gitHubUsername: "",
     linkedInUsername: "",
   },
-  professionalObjective: `
-    Busco oportunidades para aplicar e expandir meus conhecimentos 
-    em um ambiente desafiador e dinâmico. Tenho interesse em 
-    contribuir de maneira significativa para o sucesso da 
-    organização, utilizando minhas habilidades de [área de atuação] 
-    e minha experiência em [principais competências], com o intuito 
-    de promover inovação, eficiência e resultados positivos. Estou 
-    comprometido(a) com o desenvolvimento contínuo e o 
-    aprimoramento das minhas capacidades profissionais, sempre 
-    buscando o crescimento mútuo e a excelência no trabalho 
-    realizado.
-  `,
+  professionalObjective:
+    "Busco oportunidades para aplicar e expandir meus conhecimentos em um ambiente desafiador e dinâmico. Tenho interesse em contribuir de maneira significativa para o sucesso da organização, utilizando minhas habilidades de [área de atuação] e minha experiência em [principais competências], com o intuito de promover inovação, eficiência e resultados positivos. Estou comprometido(a) com o desenvolvimento contínuo e o aprimoramento das minhas capacidades profissionais, sempre buscando o crescimento mútuo e a excelência no trabalho realizado.",
+  techs: [],
 };
 
 function cvReducer(state: CVData, action: CVAction) {
@@ -131,6 +135,14 @@ function cvReducer(state: CVData, action: CVAction) {
         ...state,
         professionalObjective: action.value,
       };
+    case "ADD_TECH":
+      return {
+        ...state,
+        techs: [...state.techs, { id: uuid(), name: action.value }],
+      };
+    case "REMOVE_TECH_BY_ID":
+      const updatedTechs = state.techs.filter((t) => t.id !== action.value);
+      return { ...state, techs: updatedTechs };
   }
 }
 
@@ -142,6 +154,7 @@ export default function CVForms() {
       <PersonalDataForm cvState={cvState} cvDispatch={cvDispatch} />
       <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
       <ProfessionalObjectiveForm cvState={cvState} cvDispatch={cvDispatch} />
+      <TechsForm cvState={cvState} cvDispatch={cvDispatch} />
     </div>
   );
 }
