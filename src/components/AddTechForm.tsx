@@ -40,8 +40,7 @@ export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor={newTechInputId}>
-          Digite o nome de uma tecnologia e aperte adicionar. Para apagar uma
-          tecnologia, basta tocar/clicar nela.
+          Digite o nome de uma tecnologia e aperte adicionar.
         </label>
 
         <div>
