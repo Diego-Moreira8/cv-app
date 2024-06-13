@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import styles from "../styles/CVForms.module.css";
 import PersonalDataForm from "./PersonalDataForm";
 import OnlineProfilesForm from "./OnlineProfilesForm";
+import ProfessionalObjectiveForm from "./ProfessionalObjectiveForm";
 
 type PersonalData = {
   name: string;
@@ -19,6 +20,7 @@ type OnlineProfiles = {
 export type CVData = {
   personalData: PersonalData;
   onlineProfiles: OnlineProfiles;
+  professionalObjective: string;
 };
 
 export type CVAction =
@@ -49,6 +51,10 @@ export type CVAction =
   | {
       type: "SET_LINKEDIN_USERNAME";
       value: string;
+    }
+  | {
+      type: "SET_PROFESSIONAL_OBJECTIVE";
+      value: string;
     };
 
 const INITIAL_CV: CVData = {
@@ -63,6 +69,18 @@ const INITIAL_CV: CVData = {
     gitHubUsername: "",
     linkedInUsername: "",
   },
+  professionalObjective: `
+    Busco oportunidades para aplicar e expandir meus conhecimentos 
+    em um ambiente desafiador e dinâmico. Tenho interesse em 
+    contribuir de maneira significativa para o sucesso da 
+    organização, utilizando minhas habilidades de [área de atuação] 
+    e minha experiência em [principais competências], com o intuito 
+    de promover inovação, eficiência e resultados positivos. Estou 
+    comprometido(a) com o desenvolvimento contínuo e o 
+    aprimoramento das minhas capacidades profissionais, sempre 
+    buscando o crescimento mútuo e a excelência no trabalho 
+    realizado.
+  `,
 };
 
 function cvReducer(state: CVData, action: CVAction) {
@@ -108,6 +126,11 @@ function cvReducer(state: CVData, action: CVAction) {
           linkedInUsername: action.value,
         },
       };
+    case "SET_PROFESSIONAL_OBJECTIVE":
+      return {
+        ...state,
+        professionalObjective: action.value,
+      };
   }
 }
 
@@ -118,6 +141,7 @@ export default function CVForms() {
     <div className={styles.main}>
       <PersonalDataForm cvState={cvState} cvDispatch={cvDispatch} />
       <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
+      <ProfessionalObjectiveForm cvState={cvState} cvDispatch={cvDispatch} />
     </div>
   );
 }
