@@ -1,6 +1,7 @@
 import { useId } from "react";
 import Group from "./Group";
 import { CVAction, CVData } from "./CVForms";
+import FormWrapper from "./FromWrapper";
 
 type PersonalDataFormProps = {
   cvState: CVData;
@@ -36,53 +37,55 @@ export default function PersonalDataForm({
 
   return (
     <Group title="Dados pessoais">
-      <div>
-        <label htmlFor={fullNameInputId}>Nome completo:</label>
-        <input
-          type="text"
-          name="fullName"
-          id={fullNameInputId}
-          placeholder="João Silva"
-          value={name}
-          onChange={handleFullNameChange}
-        />
-      </div>
+      <FormWrapper>
+        <div>
+          <label htmlFor={fullNameInputId}>Nome completo:</label>
+          <input
+            type="text"
+            name="fullName"
+            id={fullNameInputId}
+            placeholder="João Silva"
+            value={name}
+            onChange={handleFullNameChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor={locationInputId}>Localização:</label>
-        <input
-          type="text"
-          name="location"
-          id={locationInputId}
-          placeholder="São Paulo - SP"
-          value={location}
-          onChange={handleLocationChange}
-        />
-      </div>
+        <div>
+          <label htmlFor={locationInputId}>Localização:</label>
+          <input
+            type="text"
+            name="location"
+            id={locationInputId}
+            placeholder="São Paulo - SP"
+            value={location}
+            onChange={handleLocationChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor={phoneInputId}>Celular:</label>
-        <input
-          type="text"
-          name="phone"
-          id={phoneInputId}
-          placeholder="(11) 98765-4321"
-          value={phone}
-          onChange={handlePhoneChange}
-        />
-      </div>
+        <div>
+          <label htmlFor={phoneInputId}>Celular:</label>
+          <input
+            type="text"
+            name="phone"
+            id={phoneInputId}
+            placeholder="(11) 98765-4321"
+            value={phone}
+            onChange={handlePhoneChange}
+          />
+        </div>
 
-      <div>
-        <label htmlFor={emailInputId}>E-mail:</label>
-        <input
-          type="email"
-          name="email"
-          id={emailInputId}
-          placeholder="joaosilva@gmail.com"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
+        <div>
+          <label htmlFor={emailInputId}>E-mail:</label>
+          <input
+            type="email"
+            name="email"
+            id={emailInputId}
+            placeholder="joaosilva@gmail.com"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+      </FormWrapper>
     </Group>
   );
 }
