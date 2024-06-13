@@ -4,7 +4,7 @@ import styles from "../styles/CVForms.module.css";
 import PersonalDataForm from "./PersonalDataForm";
 import OnlineProfilesForm from "./OnlineProfilesForm";
 import ProfessionalObjectiveForm from "./ProfessionalObjectiveForm";
-import TechsForm from "./TechsForm";
+import Techs from "./Techs";
 
 type PersonalData = {
   name: string;
@@ -21,11 +21,22 @@ type OnlineProfiles = {
 
 type Tech = { id: string; name: string };
 
+type ExpDate = { month: number; year: number };
+
+type Experience = {
+  location: string;
+  title: string;
+  startDate: ExpDate;
+  endDate?: ExpDate;
+  description: string;
+};
+
 export type CVData = {
   personalData: PersonalData;
   onlineProfiles: OnlineProfiles;
   professionalObjective: string;
   techs: Tech[];
+  academicExps: Experience[];
 };
 
 export type CVAction =
@@ -68,6 +79,10 @@ export type CVAction =
   | {
       type: "REMOVE_TECH_BY_ID";
       value: string;
+    }
+  | {
+      type: "ADD_ACADEMIC_EXP";
+      value: Experience;
     };
 
 const INITIAL_CV: CVData = {
@@ -85,6 +100,7 @@ const INITIAL_CV: CVData = {
   professionalObjective:
     "Busco oportunidades para aplicar e expandir meus conhecimentos em um ambiente desafiador e dinâmico. Tenho interesse em contribuir de maneira significativa para o sucesso da organização, utilizando minhas habilidades de [área de atuação] e minha experiência em [principais competências], com o intuito de promover inovação, eficiência e resultados positivos. Estou comprometido(a) com o desenvolvimento contínuo e o aprimoramento das minhas capacidades profissionais, sempre buscando o crescimento mútuo e a excelência no trabalho realizado.",
   techs: [],
+  academicExps: [],
 };
 
 function cvReducer(state: CVData, action: CVAction) {
@@ -143,6 +159,11 @@ function cvReducer(state: CVData, action: CVAction) {
     case "REMOVE_TECH_BY_ID":
       const updatedTechs = state.techs.filter((t) => t.id !== action.value);
       return { ...state, techs: updatedTechs };
+    case "ADD_ACADEMIC_EXP":
+      return {
+        ...state,
+        academicExps: [...state.academicExps, action.value],
+      };
   }
 }
 
@@ -151,10 +172,10 @@ export default function CVForms() {
 
   return (
     <div className={styles.main}>
-      <PersonalDataForm cvState={cvState} cvDispatch={cvDispatch} />
+      {/* <PersonalDataForm cvState={cvState} cvDispatch={cvDispatch} />
       <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
       <ProfessionalObjectiveForm cvState={cvState} cvDispatch={cvDispatch} />
-      <TechsForm cvState={cvState} cvDispatch={cvDispatch} />
+      <Techs cvState={cvState} cvDispatch={cvDispatch} /> */}
     </div>
   );
 }

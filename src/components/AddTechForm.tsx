@@ -1,11 +1,6 @@
 import { useState, useId } from "react";
 import { CVData, CVAction } from "./CVForms";
 
-type AddTechFormProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
-
 export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
   const [inputError, setInputError] = useState("");
 

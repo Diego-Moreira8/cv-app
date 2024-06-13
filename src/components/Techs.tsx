@@ -3,12 +3,12 @@ import { CVAction, CVData } from "./CVForms";
 import AddTechForm from "./AddTechForm";
 import TechsList from "./TechsList";
 
-type TechsFormProps = {
+type TechsProps = {
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function TechsForm({ cvState, cvDispatch }: TechsFormProps) {
+export default function Techs({ cvState, cvDispatch }: TechsProps) {
   return (
     <Group title="Objetivo profissional">
       <AddTechForm cvState={cvState} cvDispatch={cvDispatch} />
