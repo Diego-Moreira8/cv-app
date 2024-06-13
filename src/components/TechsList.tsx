@@ -1,4 +1,4 @@
-import { CVData, CVAction } from "./CVForms";
+import { CVData, CVAction } from "../useCVReducer";
 
 type TechsListProps = {
   cvState: CVData;

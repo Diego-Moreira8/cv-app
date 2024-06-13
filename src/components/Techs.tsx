@@ -1,5 +1,5 @@
 import Group from "./Group";
-import { CVAction, CVData } from "./CVForms";
+import { CVAction, CVData } from "../useCVReducer";
 import AddTechForm from "./AddTechForm";
 import TechsList from "./TechsList";
 
