@@ -1,4 +1,5 @@
 import { CVData, CVAction } from "../useCVReducer";
+import AcadExpList from "./AcadExpList";
 import AddAcadExpForm from "./AddAcadExpForm";
 import Group from "./Group";
 
@@ -13,6 +14,8 @@ export default function AcadExperiences({
 }: AddAcadExpFormProps) {
   return (
     <Group title="Formação acadêmica">
+      <AcadExpList cvState={cvState} cvDispatch={cvDispatch} />
+      <hr />
       <AddAcadExpForm cvDispatch={cvDispatch} />
     </Group>
   );

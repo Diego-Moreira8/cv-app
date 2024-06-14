@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { CVData, CVAction, AcademicExperience } from "../useCVReducer";
+import months from "../utils/monthsArray";
 
 type AddAcadExpFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
@@ -27,21 +28,6 @@ export default function AddAcadExpForm({ cvDispatch }: AddAcadExpFormProps) {
   const endMonthInputId = useId();
   const endYearInputId = useId();
   const descriptionInputId = useId();
-
-  const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
-  ];
 
   const monthsOptions = months.map((m, i) => (
     <option key={i} value={i + 1}>
