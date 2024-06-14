@@ -5,9 +5,13 @@ import months from "../utils/monthsArray";
 
 type AddAcadExpFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function AddAcadExpForm({ cvDispatch }: AddAcadExpFormProps) {
+export default function AddAcadExpForm({
+  cvDispatch,
+  setIsCreating,
+}: AddAcadExpFormProps) {
   const currYear = new Date().getFullYear().toString();
 
   const [location, setLocation] = useState("");
@@ -73,6 +77,7 @@ export default function AddAcadExpForm({ cvDispatch }: AddAcadExpFormProps) {
     };
 
     cvDispatch({ type: "ADD_ACADEMIC_EXP", value: newExp });
+    setIsCreating(false);
   }
 
   function validateMonthSelect(

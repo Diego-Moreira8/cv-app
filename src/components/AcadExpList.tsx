@@ -4,37 +4,52 @@ import months from "../utils/monthsArray";
 type AcadExpListProps = {
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export default function AcadExpList({ cvState, cvDispatch }: AcadExpListProps) {
+export default function AcadExpList({
+  cvState,
+  cvDispatch,
+  setIsCreating,
+}: AcadExpListProps) {
+  function handleAddExp() {
+    setIsCreating(true);
+  }
+
   function handleDelete(id: string) {
     cvDispatch({ type: "REMOVE_ACADEMIC_EXP_BY_ID", value: id });
   }
 
   return (
-    <ul>
-      {cvState.academicExps.map((exp) => (
-        <li key={exp.id}>
-          <p>
-            <strong>{exp.title}</strong>
-          </p>
+    <div>
+      <button type="button" onClick={handleAddExp}>
+        Adicionar experiência
+      </button>
 
-          <p>{exp.location}</p>
+      <ul>
+        {cvState.academicExps.map((exp) => (
+          <li key={exp.id}>
+            <p>
+              <strong>{exp.title}</strong>
+            </p>
 
-          <p>
-            de {months[exp.startDate.month]}/{exp.startDate.year} até{" "}
-            {months[exp.startDate.year]}
-          </p>
+            <p>{exp.location}</p>
 
-          <p>{exp.description}</p>
+            <p>
+              de {months[exp.startDate.month]}/{exp.startDate.year} até{" "}
+              {months[exp.startDate.year]}
+            </p>
 
-          <div>
-            <button type="button" onClick={() => handleDelete(exp.id)}>
-              Apagar
-            </button>
-          </div>
-        </li>
-      ))}
-    </ul>
+            <p>{exp.description}</p>
+
+            <div>
+              <button type="button" onClick={() => handleDelete(exp.id)}>
+                Apagar
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

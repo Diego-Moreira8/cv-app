@@ -4,7 +4,7 @@ import OnlineProfilesForm from "./OnlineProfilesForm";
 import ProfessionalObjectiveForm from "./ProfessionalObjectiveForm";
 import Techs from "./Techs";
 import useCVReducer from "../useCVReducer";
-import AcadExperiences from "./AcadExperiences";
+import AcadExps from "./AcadExps";
 
 export default function CVForms() {
   const { cvState, cvDispatch } = useCVReducer();
@@ -15,7 +15,7 @@ export default function CVForms() {
       <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
       <ProfessionalObjectiveForm cvState={cvState} cvDispatch={cvDispatch} />
       <Techs cvState={cvState} cvDispatch={cvDispatch} />
-      <AcadExperiences cvState={cvState} cvDispatch={cvDispatch} />
+      <AcadExps cvState={cvState} cvDispatch={cvDispatch} />
     </div>
   );
 }
