@@ -18,11 +18,12 @@ type Tech = { id: string; name: string };
 
 type ExpDate = { month: number; year: number };
 
-type Experience = {
+export type AcademicExperience = {
+  id: string;
   location: string;
   title: string;
   startDate: ExpDate;
-  endDate?: ExpDate;
+  endDate: ExpDate;
   description: string;
 };
 
@@ -31,7 +32,7 @@ export type CVData = {
   onlineProfiles: OnlineProfiles;
   professionalObjective: string;
   techs: Tech[];
-  academicExps: Experience[];
+  academicExps: AcademicExperience[];
 };
 
 export type CVAction =
@@ -77,7 +78,7 @@ export type CVAction =
     }
   | {
       type: "ADD_ACADEMIC_EXP";
-      value: Experience;
+      value: AcademicExperience;
     };
 
 const INITIAL_CV: CVData = {
