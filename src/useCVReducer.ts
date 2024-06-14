@@ -79,6 +79,10 @@ export type CVAction =
   | {
       type: "ADD_ACADEMIC_EXP";
       value: AcademicExperience;
+    }
+  | {
+      type: "REMOVE_ACADEMIC_EXP_BY_ID";
+      value: string;
     };
 
 const INITIAL_CV: CVData = {
@@ -160,6 +164,11 @@ function cvReducer(state: CVData, action: CVAction) {
         ...state,
         academicExps: [...state.academicExps, action.value],
       };
+    case "REMOVE_ACADEMIC_EXP_BY_ID":
+      const updatedExps = state.academicExps.filter(
+        (exp) => exp.id !== action.value
+      );
+      return { ...state, academicExps: updatedExps };
   }
 }
 

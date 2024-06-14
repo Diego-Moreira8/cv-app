@@ -7,6 +7,10 @@ type AcadExpListProps = {
 };
 
 export default function AcadExpList({ cvState, cvDispatch }: AcadExpListProps) {
+  function handleDelete(id: string) {
+    cvDispatch({ type: "REMOVE_ACADEMIC_EXP_BY_ID", value: id });
+  }
+
   return (
     <ul>
       {cvState.academicExps.map((exp) => (
@@ -23,6 +27,12 @@ export default function AcadExpList({ cvState, cvDispatch }: AcadExpListProps) {
           </p>
 
           <p>{exp.description}</p>
+
+          <div>
+            <button type="button" onClick={() => handleDelete(exp.id)}>
+              Apagar
+            </button>
+          </div>
         </li>
       ))}
     </ul>
