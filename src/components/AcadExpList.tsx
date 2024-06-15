@@ -37,7 +37,7 @@ export default function AcadExpList({
 
             <p>
               de {months[exp.startDate.month]}/{exp.startDate.year} até{" "}
-              {months[exp.startDate.year]}
+              {months[exp.endDate.month]}/{exp.endDate.year}
             </p>
 
             <p>{exp.description}</p>
