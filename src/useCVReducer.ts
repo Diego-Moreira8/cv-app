@@ -16,14 +16,14 @@ type OnlineProfiles = {
 
 type Tech = { id: string; name: string };
 
-type ExpDate = { month: number; year: number };
-
-export type AcademicExperience = {
+export type Experience = {
   id: string;
   location: string;
   title: string;
-  startDate: ExpDate;
-  endDate: ExpDate;
+  startMonth: number;
+  startYear: string;
+  endMonth: number;
+  endYear: string;
   description: string;
 };
 
@@ -32,7 +32,7 @@ export type CVData = {
   onlineProfiles: OnlineProfiles;
   professionalObjective: string;
   techs: Tech[];
-  academicExps: AcademicExperience[];
+  academicExps: Experience[];
 };
 
 export type CVAction =
@@ -78,7 +78,11 @@ export type CVAction =
     }
   | {
       type: "ADD_ACADEMIC_EXP";
-      value: AcademicExperience;
+      value: Experience;
+    }
+  | {
+      type: "EDIT_ACADEMIC_EXP";
+      value: Experience;
     }
   | {
       type: "REMOVE_ACADEMIC_EXP_BY_ID";
@@ -105,32 +109,37 @@ const INITIAL_CV: CVData = {
 
 function cvReducer(state: CVData, action: CVAction) {
   switch (action.type) {
-    case "SET_NAME":
+    case "SET_NAME": {
       return {
         ...state,
         personalData: { ...state.personalData, name: action.value },
       };
-    case "SET_LOCATION":
+    }
+    case "SET_LOCATION": {
       return {
         ...state,
         personalData: { ...state.personalData, location: action.value },
       };
-    case "SET_PHONE":
+    }
+    case "SET_PHONE": {
       return {
         ...state,
         personalData: { ...state.personalData, phone: action.value },
       };
-    case "SET_EMAIL":
+    }
+    case "SET_EMAIL": {
       return {
         ...state,
         personalData: { ...state.personalData, email: action.value },
       };
-    case "SET_PORTFOLIO_URL":
+    }
+    case "SET_PORTFOLIO_URL": {
       return {
         ...state,
         onlineProfiles: { ...state.onlineProfiles, portfolioURL: action.value },
       };
-    case "SET_GITHUB_USERNAME":
+    }
+    case "SET_GITHUB_USERNAME": {
       return {
         ...state,
         onlineProfiles: {
@@ -138,7 +147,8 @@ function cvReducer(state: CVData, action: CVAction) {
           gitHubUsername: action.value,
         },
       };
-    case "SET_LINKEDIN_USERNAME":
+    }
+    case "SET_LINKEDIN_USERNAME": {
       return {
         ...state,
         onlineProfiles: {
@@ -146,29 +156,44 @@ function cvReducer(state: CVData, action: CVAction) {
           linkedInUsername: action.value,
         },
       };
-    case "SET_PROFESSIONAL_OBJECTIVE":
+    }
+    case "SET_PROFESSIONAL_OBJECTIVE": {
       return {
         ...state,
         professionalObjective: action.value,
       };
-    case "ADD_TECH":
+    }
+    case "ADD_TECH": {
       return {
         ...state,
         techs: [...state.techs, { id: uuid(), name: action.value }],
       };
-    case "REMOVE_TECH_BY_ID":
+    }
+    case "REMOVE_TECH_BY_ID": {
       const updatedTechs = state.techs.filter((t) => t.id !== action.value);
       return { ...state, techs: updatedTechs };
-    case "ADD_ACADEMIC_EXP":
+    }
+    case "ADD_ACADEMIC_EXP": {
       return {
         ...state,
         academicExps: [...state.academicExps, action.value],
       };
-    case "REMOVE_ACADEMIC_EXP_BY_ID":
+    }
+    case "EDIT_ACADEMIC_EXP": {
+      const updatedExps = state.academicExps.map((exp) =>
+        exp.id === action.value.id ? action.value : exp
+      );
+      return {
+        ...state,
+        academicExps: updatedExps,
+      };
+    }
+    case "REMOVE_ACADEMIC_EXP_BY_ID": {
       const updatedExps = state.academicExps.filter(
         (exp) => exp.id !== action.value
       );
       return { ...state, academicExps: updatedExps };
+    }
   }
 }
 

@@ -1,8 +1,9 @@
 import { useId, useReducer, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { CVData, CVAction, AcademicExperience } from "../useCVReducer";
+import { CVData, CVAction, Experience } from "../useCVReducer";
 import months from "../utils/monthsArray";
 import yearStrToNumber from "../utils/yearStrToNumber";
+import { ExpGroupActions } from "./AcadExps";
 
 enum InputNames {
   Location = "location",
@@ -14,19 +15,11 @@ enum InputNames {
   Description = "description",
 }
 
-type FormData = {
-  location: string;
-  title: string;
-  startMonth: number;
-  startYear: string;
-  endMonth: number;
-  endYear: string;
-  description: string;
-};
-
 type AddAcadExpFormProps = {
+  cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
-  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  expGroupDispatch: React.Dispatch<ExpGroupActions>;
+  expToEditId: string;
 };
 
 type FormActions = {
@@ -36,7 +29,8 @@ type FormActions = {
 
 const CURR_YEAR = new Date().getFullYear().toString();
 
-const INITIAL_INPUTS: FormData = {
+const INITIAL_EXP: Omit<Experience, "id"> = {
+  // ID will be generated on reducer creation if necessary
   location: "",
   title: "",
   startMonth: 1,
@@ -46,7 +40,7 @@ const INITIAL_INPUTS: FormData = {
   description: "",
 };
 
-function formReducer(state: FormData, action: FormActions) {
+function formReducer(state: Experience, action: FormActions) {
   const { inputName, value } = action;
 
   if (
@@ -66,10 +60,18 @@ function formReducer(state: FormData, action: FormActions) {
 }
 
 export default function AddAcadExpForm({
+  cvState,
   cvDispatch,
-  setIsCreating,
+  expGroupDispatch,
+  expToEditId,
 }: AddAcadExpFormProps) {
-  const [formState, formDispatch] = useReducer(formReducer, INITIAL_INPUTS);
+  const expToEdit = cvState.academicExps.find((exp) => exp.id === expToEditId);
+  console.log(expToEdit);
+
+  const [formState, formDispatch] = useReducer(
+    formReducer,
+    expToEdit ? expToEdit : { ...INITIAL_EXP, id: uuid() }
+  );
 
   const [startYearError, setStartYearError] = useState("");
   const [endYearError, setEndYearError] = useState("");
@@ -119,18 +121,13 @@ export default function AddAcadExpForm({
       return;
     }
 
-    // If valid inputs, save experience
-    const newExp: AcademicExperience = {
-      id: uuid(),
-      location: formState.location,
-      title: formState.title,
-      startDate: { month: formState.startMonth, year: startYearNumber },
-      endDate: { month: formState.endMonth, year: endYearNumber },
-      description: formState.description,
-    };
+    if (expToEditId) {
+      cvDispatch({ type: "EDIT_ACADEMIC_EXP", value: formState });
+    } else {
+      cvDispatch({ type: "ADD_ACADEMIC_EXP", value: formState });
+    }
 
-    cvDispatch({ type: "ADD_ACADEMIC_EXP", value: newExp });
-    setIsCreating(false);
+    expGroupDispatch({ type: "CLOSE_FORM" });
   }
 
   return (

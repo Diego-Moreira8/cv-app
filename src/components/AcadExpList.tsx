@@ -1,19 +1,24 @@
 import { CVData, CVAction } from "../useCVReducer";
 import months from "../utils/monthsArray";
+import { ExpGroupActions } from "./AcadExps";
 
 type AcadExpListProps = {
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
-  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  expGroupDispatch: React.Dispatch<ExpGroupActions>;
 };
 
 export default function AcadExpList({
   cvState,
   cvDispatch,
-  setIsCreating,
+  expGroupDispatch,
 }: AcadExpListProps) {
   function handleAddExp() {
-    setIsCreating(true);
+    expGroupDispatch({ type: "CREATE_EXP" });
+  }
+
+  function handleEdit(id: string) {
+    expGroupDispatch({ type: "EDIT_EXP_BY_ID", value: id });
   }
 
   function handleDelete(id: string) {
@@ -36,13 +41,16 @@ export default function AcadExpList({
             <p>{exp.location}</p>
 
             <p>
-              de {months[exp.startDate.month]}/{exp.startDate.year} até{" "}
-              {months[exp.endDate.month]}/{exp.endDate.year}
+              de {months[exp.startMonth]}/{exp.startYear} até{" "}
+              {months[exp.endMonth]}/{exp.endYear}
             </p>
 
             <p>{exp.description}</p>
 
             <div>
+              <button type="button" onClick={() => handleEdit(exp.id)}>
+                Editar
+              </button>
               <button type="button" onClick={() => handleDelete(exp.id)}>
                 Apagar
               </button>
