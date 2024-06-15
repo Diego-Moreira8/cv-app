@@ -1,26 +1,75 @@
-import { useId, useState } from "react";
+import { useId, useReducer, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { CVData, CVAction, AcademicExperience } from "../useCVReducer";
 import months from "../utils/monthsArray";
+import yearStrToNumber from "../utils/yearStrToNumber";
+
+enum InputNames {
+  Location = "location",
+  Title = "title",
+  StartMonth = "startMonth",
+  StartYear = "startYear",
+  EndMonth = "endMonth",
+  EndYear = "endYear",
+  Description = "description",
+}
+
+type FormData = {
+  location: string;
+  title: string;
+  startMonth: number;
+  startYear: string;
+  endMonth: number;
+  endYear: string;
+  description: string;
+};
 
 type AddAcadExpFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type FormActions = {
+  inputName: InputNames;
+  value: string;
+};
+
+const CURR_YEAR = new Date().getFullYear().toString();
+
+const INITIAL_INPUTS: FormData = {
+  location: "",
+  title: "",
+  startMonth: 1,
+  startYear: CURR_YEAR,
+  endMonth: 1,
+  endYear: CURR_YEAR,
+  description: "",
+};
+
+function formReducer(state: FormData, action: FormActions) {
+  const { inputName, value } = action;
+
+  if (
+    inputName === InputNames.StartMonth ||
+    inputName === InputNames.EndMonth
+  ) {
+    return {
+      ...state,
+      [inputName]: parseInt(value),
+    };
+  }
+
+  return {
+    ...state,
+    [inputName]: value,
+  };
+}
+
 export default function AddAcadExpForm({
   cvDispatch,
   setIsCreating,
 }: AddAcadExpFormProps) {
-  const currYear = new Date().getFullYear().toString();
-
-  const [location, setLocation] = useState("");
-  const [title, setTitle] = useState("");
-  const [startMonth, setStartMonth] = useState(1);
-  const [startYear, setStartYear] = useState(currYear);
-  const [endMonth, setEndMonth] = useState(1);
-  const [endYear, setEndYear] = useState(currYear);
-  const [description, setDescription] = useState("");
+  const [formState, formDispatch] = useReducer(formReducer, INITIAL_INPUTS);
 
   const [startYearError, setStartYearError] = useState("");
   const [endYearError, setEndYearError] = useState("");
@@ -33,7 +82,7 @@ export default function AddAcadExpForm({
   const endYearInputId = useId();
   const descriptionInputId = useId();
 
-  const monthsOptions = months.map((m, i) => (
+  const monthsOptionsElements = months.map((m, i) => (
     <option key={i} value={i + 1}>
       {m}
     </option>
@@ -42,18 +91,19 @@ export default function AddAcadExpForm({
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    // Validate year inputs
     setStartYearError("");
     setEndYearError("");
 
     const YEAR_ERROR_MSG = "O ano parece ser inválido";
+    const startYearNumber = yearStrToNumber(formState.startYear);
+    const endYearNumber = yearStrToNumber(formState.endYear);
 
-    const startYearNumber = validateYear(startYear);
     if (!startYearNumber) {
       setStartYearError(YEAR_ERROR_MSG);
       return;
     }
 
-    const endYearNumber = validateYear(endYear);
     if (!endYearNumber) {
       setEndYearError(YEAR_ERROR_MSG);
       return;
@@ -61,44 +111,26 @@ export default function AddAcadExpForm({
 
     const endsBeforeStart =
       endYearNumber < startYearNumber ||
-      (endYearNumber === startYearNumber && endMonth < startMonth);
+      (endYearNumber === startYearNumber &&
+        formState.endMonth < formState.startMonth);
+
     if (endsBeforeStart) {
       setEndYearError("A data de conclusão não pode ser anterior à de início");
       return;
     }
 
+    // If valid inputs, save experience
     const newExp: AcademicExperience = {
       id: uuid(),
-      location: location,
-      title: title,
-      startDate: { month: startMonth, year: startYearNumber },
-      endDate: { month: endMonth, year: endYearNumber },
-      description: description,
+      location: formState.location,
+      title: formState.title,
+      startDate: { month: formState.startMonth, year: startYearNumber },
+      endDate: { month: formState.endMonth, year: endYearNumber },
+      description: formState.description,
     };
 
     cvDispatch({ type: "ADD_ACADEMIC_EXP", value: newExp });
     setIsCreating(false);
-  }
-
-  function validateMonthSelect(
-    event: React.ChangeEvent<HTMLSelectElement>,
-    currMonth: number
-  ) {
-    const newMonth = parseInt(event.target.value);
-    if (isNaN(newMonth) || newMonth < 1 || newMonth > 12) {
-      return currMonth;
-    }
-    return newMonth;
-  }
-
-  function validateYear(year: string): number | null {
-    const trimmedYear = year.trim();
-    if (!trimmedYear) return null;
-
-    const yearNumber = parseInt(trimmedYear);
-    if (isNaN(yearNumber) || !Number.isInteger(yearNumber)) return null;
-
-    return yearNumber;
   }
 
   return (
@@ -107,12 +139,17 @@ export default function AddAcadExpForm({
         <label htmlFor={locationInputId}>Nome da instituição:</label>
         <input
           type="text"
-          name="location"
+          name={InputNames.Location}
           id={locationInputId}
           placeholder="UFCAT - Universidade Federal de Catalão"
           required
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          value={formState.location}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.Location,
+              value: e.target.value,
+            })
+          }
         />
       </div>
 
@@ -120,12 +157,17 @@ export default function AddAcadExpForm({
         <label htmlFor={titleInputId}>Nome do curso:</label>
         <input
           type="text"
-          name="title"
+          name={InputNames.Title}
           id={titleInputId}
           placeholder="Ciência da Computação"
           required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={formState.title}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.Title,
+              value: e.target.value,
+            })
+          }
         />
       </div>
 
@@ -134,23 +176,33 @@ export default function AddAcadExpForm({
 
         <label htmlFor={startMonthInputId}>Mês:</label>
         <select
-          name="startMonth"
+          name={InputNames.StartMonth}
           id={startMonthInputId}
-          value={startMonth}
-          onChange={(e) => setStartMonth(validateMonthSelect(e, startMonth))}
+          value={formState.startMonth}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.StartMonth,
+              value: e.target.value,
+            })
+          }
         >
-          {monthsOptions}
+          {monthsOptionsElements}
         </select>
 
         <label htmlFor={startYearInputId}>Ano:</label>
         <input
           type="number"
-          name="startYear"
+          name={InputNames.StartYear}
           id={startYearInputId}
           required
           min={1900}
-          value={startYear}
-          onChange={(e) => setStartYear(e.target.value)}
+          value={formState.startYear}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.StartYear,
+              value: e.target.value,
+            })
+          }
         />
 
         <p>{startYearError}</p>
@@ -161,23 +213,33 @@ export default function AddAcadExpForm({
 
         <label htmlFor={endMonthInputId}>Mês:</label>
         <select
-          name="endMonth"
+          name={InputNames.EndMonth}
           id={endMonthInputId}
-          value={endMonth}
-          onChange={(e) => setEndMonth(validateMonthSelect(e, endMonth))}
+          value={formState.endMonth}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.EndMonth,
+              value: e.target.value,
+            })
+          }
         >
-          {monthsOptions}
+          {monthsOptionsElements}
         </select>
 
         <label htmlFor={endYearInputId}>Ano:</label>
         <input
           type="number"
-          name="endYear"
+          name={InputNames.EndYear}
           id={endYearInputId}
           required
           min={1900}
-          value={endYear}
-          onChange={(e) => setEndYear(e.target.value)}
+          value={formState.endYear}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.EndYear,
+              value: e.target.value,
+            })
+          }
         />
 
         <p>{endYearError}</p>
@@ -186,11 +248,16 @@ export default function AddAcadExpForm({
       <div>
         <label htmlFor={descriptionInputId}>Descreva esta experiência:</label>
         <textarea
-          name="description"
+          name={InputNames.Description}
           id={descriptionInputId}
           rows={5}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={formState.description}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.Description,
+              value: e.target.value,
+            })
+          }
         ></textarea>
       </div>
 
