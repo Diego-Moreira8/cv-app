@@ -1,6 +1,11 @@
 import { useReducer } from "react";
 import { v4 as uuid } from "uuid";
 
+export enum ExpType {
+  Academic = "ACADEMIC",
+  Professional = "PROFESSIONAL",
+}
+
 type PersonalData = {
   name: string;
   location: string;
@@ -33,6 +38,7 @@ export type CVData = {
   professionalObjective: string;
   techs: Tech[];
   academicExps: Experience[];
+  professionalExps: Experience[];
 };
 
 export type CVAction =
@@ -77,16 +83,19 @@ export type CVAction =
       value: string;
     }
   | {
-      type: "ADD_ACADEMIC_EXP";
+      type: "ADD_EXPERIENCE";
       value: Experience;
+      expType: ExpType;
     }
   | {
-      type: "EDIT_ACADEMIC_EXP";
+      type: "EDIT_EXPERIENCE";
       value: Experience;
+      expType: ExpType;
     }
   | {
-      type: "REMOVE_ACADEMIC_EXP_BY_ID";
+      type: "REMOVE_EXPERIENCE";
       value: string;
+      expType: ExpType;
     };
 
 const INITIAL_CV: CVData = {
@@ -105,6 +114,7 @@ const INITIAL_CV: CVData = {
     "Busco oportunidades para aplicar e expandir meus conhecimentos em um ambiente desafiador e dinâmico. Tenho interesse em contribuir de maneira significativa para o sucesso da organização, utilizando minhas habilidades de [área de atuação] e minha experiência em [principais competências], com o intuito de promover inovação, eficiência e resultados positivos. Estou comprometido(a) com o desenvolvimento contínuo e o aprimoramento das minhas capacidades profissionais, sempre buscando o crescimento mútuo e a excelência no trabalho realizado.",
   techs: [],
   academicExps: [],
+  professionalExps: [],
 };
 
 function cvReducer(state: CVData, action: CVAction) {
@@ -173,26 +183,43 @@ function cvReducer(state: CVData, action: CVAction) {
       const updatedTechs = state.techs.filter((t) => t.id !== action.value);
       return { ...state, techs: updatedTechs };
     }
-    case "ADD_ACADEMIC_EXP": {
+    case "ADD_EXPERIENCE": {
+      const expTypeKey =
+        action.expType === ExpType.Academic
+          ? "academicExps"
+          : "professionalExps";
+
       return {
         ...state,
-        academicExps: [...state.academicExps, action.value],
+        [expTypeKey]: [...state[expTypeKey], action.value],
       };
     }
-    case "EDIT_ACADEMIC_EXP": {
-      const updatedExps = state.academicExps.map((exp) =>
+    case "EDIT_EXPERIENCE": {
+      const expTypeKey =
+        action.expType === ExpType.Academic
+          ? "academicExps"
+          : "professionalExps";
+
+      const updatedExps = state[expTypeKey].map((exp) =>
         exp.id === action.value.id ? action.value : exp
       );
+
       return {
         ...state,
-        academicExps: updatedExps,
+        [expTypeKey]: updatedExps,
       };
     }
-    case "REMOVE_ACADEMIC_EXP_BY_ID": {
-      const updatedExps = state.academicExps.filter(
+    case "REMOVE_EXPERIENCE": {
+      const expTypeKey =
+        action.expType === ExpType.Academic
+          ? "academicExps"
+          : "professionalExps";
+
+      const updatedExps = state[expTypeKey].filter(
         (exp) => exp.id !== action.value
       );
-      return { ...state, academicExps: updatedExps };
+
+      return { ...state, [expTypeKey]: updatedExps };
     }
   }
 }

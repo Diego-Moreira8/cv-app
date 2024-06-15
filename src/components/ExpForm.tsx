@@ -1,9 +1,9 @@
 import { useId, useReducer, useState } from "react";
-import { v4 as uuid } from "uuid";
-import { CVData, CVAction, Experience } from "../useCVReducer";
-import months from "../utils/monthsArray";
+import { ExpGroupActions } from "./ExpGroup";
+import { CVData, CVAction, Experience, ExpType } from "../useCVReducer";
 import yearStrToNumber from "../utils/yearStrToNumber";
-import { ExpGroupActions } from "./AcadExps";
+import months from "../utils/monthsArray";
+import { v4 as uuid } from "uuid";
 
 enum InputNames {
   Location = "location",
@@ -15,7 +15,8 @@ enum InputNames {
   Description = "description",
 }
 
-type AddAcadExpFormProps = {
+type ExpFormProps = {
+  expType: ExpType;
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
   expGroupDispatch: React.Dispatch<ExpGroupActions>;
@@ -59,14 +60,23 @@ function formReducer(state: Experience, action: FormActions) {
   };
 }
 
-export default function AddAcadExpForm({
+export default function ExpForm({
+  expType,
   cvState,
   cvDispatch,
   expGroupDispatch,
   expToEditId,
-}: AddAcadExpFormProps) {
-  const expToEdit = cvState.academicExps.find((exp) => exp.id === expToEditId);
-  console.log(expToEdit);
+}: ExpFormProps) {
+  const isAcademic = expType === ExpType.Academic;
+
+  let expToEdit = null;
+  if (expToEditId) {
+    const experiences = isAcademic
+      ? cvState.academicExps
+      : cvState.professionalExps;
+
+    expToEdit = experiences.find((exp) => exp.id === expToEditId);
+  }
 
   const [formState, formDispatch] = useReducer(
     formReducer,
@@ -122,9 +132,17 @@ export default function AddAcadExpForm({
     }
 
     if (expToEditId) {
-      cvDispatch({ type: "EDIT_ACADEMIC_EXP", value: formState });
+      cvDispatch({
+        type: "EDIT_EXPERIENCE",
+        expType: expType,
+        value: formState,
+      });
     } else {
-      cvDispatch({ type: "ADD_ACADEMIC_EXP", value: formState });
+      cvDispatch({
+        type: "ADD_EXPERIENCE",
+        expType: expType,
+        value: formState,
+      });
     }
 
     expGroupDispatch({ type: "CLOSE_FORM" });
@@ -132,13 +150,21 @@ export default function AddAcadExpForm({
 
   return (
     <form onSubmit={handleSubmit}>
+      <legend>
+        {isAcademic ? "Adicionar curso" : "Adicionar experiência profissional"}
+      </legend>
+
       <div>
-        <label htmlFor={locationInputId}>Nome da instituição:</label>
+        <label htmlFor={locationInputId}>
+          Nome da {isAcademic ? "instituição" : "Empresa"}:
+        </label>
         <input
           type="text"
           name={InputNames.Location}
           id={locationInputId}
-          placeholder="UFCAT - Universidade Federal de Catalão"
+          placeholder={
+            isAcademic ? "UFCAT - Universidade Federal de Catalão" : "Google"
+          }
           required
           value={formState.location}
           onChange={(e) =>
@@ -156,7 +182,9 @@ export default function AddAcadExpForm({
           type="text"
           name={InputNames.Title}
           id={titleInputId}
-          placeholder="Ciência da Computação"
+          placeholder={
+            isAcademic ? "Ciência da Computação" : "Desenvolvedor Front-End"
+          }
           required
           value={formState.title}
           onChange={(e) =>

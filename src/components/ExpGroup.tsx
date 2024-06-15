@@ -1,13 +1,13 @@
 import { useReducer } from "react";
-import { CVData, CVAction } from "../useCVReducer";
-import AcadExpList from "./AcadExpList";
-import AddAcadExpForm from "./AddAcadExpForm";
+import { CVData, CVAction, ExpType } from "../useCVReducer";
 import Group from "./Group";
+import ExpForm from "./ExpForm";
+import ExpList from "./ExpList";
 
 type ExpGroupProps = {
+  expType: ExpType;
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
-  expToEditId: string;
 };
 
 type ExpGroupState = { formOpen: boolean; expToEditId: string };
@@ -30,23 +30,35 @@ function expGroupReducer(state: ExpGroupState, action: ExpGroupActions) {
   }
 }
 
-export default function ExpGroup({ cvState, cvDispatch }: ExpGroupProps) {
+export default function ExpGroup({
+  expType,
+  cvState,
+  cvDispatch,
+}: ExpGroupProps) {
   const [expGroupState, expGroupDispatch] = useReducer(
     expGroupReducer,
     INITIAL_STATE
   );
 
   return (
-    <Group title="Formação acadêmica">
+    <Group
+      title={
+        expType === ExpType.Academic
+          ? "Formação acadêmica"
+          : "Experiências profissionais"
+      }
+    >
       {expGroupState.formOpen ? (
-        <AddAcadExpForm
+        <ExpForm
+          expType={expType}
           cvState={cvState}
           cvDispatch={cvDispatch}
           expGroupDispatch={expGroupDispatch}
           expToEditId={expGroupState.expToEditId}
         />
       ) : (
-        <AcadExpList
+        <ExpList
+          expType={expType}
           cvState={cvState}
           cvDispatch={cvDispatch}
           expGroupDispatch={expGroupDispatch}

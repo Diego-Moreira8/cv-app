@@ -3,8 +3,8 @@ import PersonalDataForm from "./PersonalDataForm";
 import OnlineProfilesForm from "./OnlineProfilesForm";
 import ProfessionalObjectiveForm from "./ProfessionalObjectiveForm";
 import Techs from "./Techs";
-import useCVReducer from "../useCVReducer";
-import AcadExps from "./AcadExps";
+import useCVReducer, { ExpType } from "../useCVReducer";
+import ExpGroup from "./ExpGroup";
 
 export default function CVForms() {
   const { cvState, cvDispatch } = useCVReducer();
@@ -15,7 +15,16 @@ export default function CVForms() {
       <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
       <ProfessionalObjectiveForm cvState={cvState} cvDispatch={cvDispatch} />
       <Techs cvState={cvState} cvDispatch={cvDispatch} />
-      <AcadExps cvState={cvState} cvDispatch={cvDispatch} />
+      <ExpGroup
+        expType={ExpType.Academic}
+        cvState={cvState}
+        cvDispatch={cvDispatch}
+      />
+      <ExpGroup
+        expType={ExpType.Professional}
+        cvState={cvState}
+        cvDispatch={cvDispatch}
+      />
     </div>
   );
 }

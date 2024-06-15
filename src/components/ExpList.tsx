@@ -1,19 +1,26 @@
-import { CVData, CVAction } from "../useCVReducer";
+import { CVData, CVAction, ExpType } from "../useCVReducer";
 import months from "../utils/monthsArray";
-import { ExpGroupActions } from "./AcadExps";
+import { ExpGroupActions } from "./ExpGroup";
 
-type AcadExpListProps = {
+type ExpListProps = {
+  expType: ExpType;
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
   expGroupDispatch: React.Dispatch<ExpGroupActions>;
 };
 
-export default function AcadExpList({
+export default function ExpList({
+  expType,
   cvState,
   cvDispatch,
   expGroupDispatch,
-}: AcadExpListProps) {
-  function handleAddExp() {
+}: ExpListProps) {
+  const experiences =
+    expType === ExpType.Academic
+      ? cvState.academicExps
+      : cvState.professionalExps;
+
+  function handleAdd() {
     expGroupDispatch({ type: "CREATE_EXP" });
   }
 
@@ -22,17 +29,17 @@ export default function AcadExpList({
   }
 
   function handleDelete(id: string) {
-    cvDispatch({ type: "REMOVE_ACADEMIC_EXP_BY_ID", value: id });
+    cvDispatch({ type: "REMOVE_EXPERIENCE", expType: expType, value: id });
   }
 
   return (
     <div>
-      <button type="button" onClick={handleAddExp}>
+      <button type="button" onClick={handleAdd}>
         Adicionar experiência
       </button>
 
       <ul>
-        {cvState.academicExps.map((exp) => (
+        {experiences.map((exp) => (
           <li key={exp.id}>
             <p>
               <strong>{exp.title}</strong>
