@@ -1,5 +1,6 @@
 import { useState, useId } from "react";
 import { CVData, CVAction } from "../useCVReducer";
+import styles from "../styles/AddTechForm.module.css";
 
 type AddTechFormProps = {
   cvState: CVData;
@@ -26,7 +27,9 @@ export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
       return;
     }
 
-    const techAlreadyExists = cvState.techs.find((t) => t.name === techName);
+    const techAlreadyExists = cvState.techs.find(
+      (t) => t.name.toLocaleLowerCase() === techName.toLowerCase()
+    );
 
     if (techAlreadyExists) {
       setInputError("Esta tecnologia já foi inserida.");
@@ -43,12 +46,14 @@ export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
           Digite o nome de uma tecnologia e aperte adicionar.
         </label>
 
-        <div>
+        <div className={styles.inputRow}>
           <input type="text" name="newTech" id={newTechInputId} />
           <button type="submit">Adicionar</button>
         </div>
 
-        <p>{inputError}</p>
+        <p className={styles.error}>
+          <i>{inputError}</i>
+        </p>
       </div>
     </form>
   );

@@ -26,7 +26,13 @@ i {
 }
 
 button {
+  padding: 0.5rem 1rem;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
   cursor: pointer;
+  font-weight: bold;
 }
 
 label {
@@ -45,4 +51,9 @@ textarea {
 
 textarea {
   resize: none;
+}
+
+hr {
+  border: 1px solid lightgray;
+  margin: 1rem 0;
 }

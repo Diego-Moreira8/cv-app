@@ -10,8 +10,9 @@ type TechsProps = {
 
 export default function Techs({ cvState, cvDispatch }: TechsProps) {
   return (
-    <Group title="Objetivo profissional">
+    <Group title="Tecnologias">
       <AddTechForm cvState={cvState} cvDispatch={cvDispatch} />
+      <hr />
       <TechsList cvState={cvState} cvDispatch={cvDispatch} />
     </Group>
   );

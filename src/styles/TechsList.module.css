@@ -1,0 +1,13 @@
+.techsList {
+  margin: 1rem 0.5rem;
+}
+
+.techsList > p {
+  margin-bottom: 1rem;
+}
+
+.techsList > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}

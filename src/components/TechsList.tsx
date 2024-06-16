@@ -1,4 +1,5 @@
 import { CVData, CVAction } from "../useCVReducer";
+import styles from "../styles/TechsList.module.css";
 
 type TechsListProps = {
   cvState: CVData;
@@ -19,7 +20,7 @@ export default function TechsList({ cvState, cvDispatch }: TechsListProps) {
   }
 
   return (
-    <div>
+    <div className={styles.techsList}>
       {techItems.length > 0 ? (
         <>
           <p>Para apagar uma tecnologia, basta tocar/clicar nela.</p>
