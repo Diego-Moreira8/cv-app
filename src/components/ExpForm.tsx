@@ -286,7 +286,12 @@ export default function ExpForm({
         ></textarea>
       </div>
 
-      {/* <button type="button">Cancelar</button> */}
+      <button
+        type="button"
+        onClick={() => expGroupDispatch({ type: "CLOSE_FORM" })}
+      >
+        Cancelar
+      </button>
       <button type="submit">Salvar</button>
     </form>
   );
