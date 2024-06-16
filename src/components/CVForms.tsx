@@ -1,7 +1,7 @@
 import styles from "../styles/CVForms.module.css";
 import PersonalDataForm from "./PersonalDataForm";
 import OnlineProfilesForm from "./OnlineProfilesForm";
-import ProfessionalObjectiveForm from "./ProfessionalObjectiveForm";
+import ProObjForm from "./ProObjForm";
 import Techs from "./Techs";
 import useCVReducer, { ExpType } from "../useCVReducer";
 import ExpGroup from "./ExpGroup";
@@ -13,7 +13,7 @@ export default function CVForms() {
     <div className={styles.main}>
       <PersonalDataForm cvState={cvState} cvDispatch={cvDispatch} />
       <OnlineProfilesForm cvState={cvState} cvDispatch={cvDispatch} />
-      <ProfessionalObjectiveForm cvState={cvState} cvDispatch={cvDispatch} />
+      <ProObjForm cvState={cvState} cvDispatch={cvDispatch} />
       <Techs cvState={cvState} cvDispatch={cvDispatch} />
       <ExpGroup
         expType={ExpType.Academic}

@@ -2,16 +2,14 @@ import { useId } from "react";
 import Group from "./Group";
 import { CVAction, CVData } from "../useCVReducer";
 import FormWrapper from "./FromWrapper";
+import styles from "../styles/ProObjForm.module.css";
 
-type ProfessionalObjectiveFormProps = {
+type ProObjFormProps = {
   cvState: CVData;
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function ProfessionalObjectiveForm({
-  cvState,
-  cvDispatch,
-}: ProfessionalObjectiveFormProps) {
+export default function ProObjForm({ cvState, cvDispatch }: ProObjFormProps) {
   const { professionalObjective } = cvState;
 
   const proObjTextAreaId = useId();
@@ -30,9 +28,10 @@ export default function ProfessionalObjectiveForm({
           </label>
 
           <textarea
+            className={styles.textarea}
             name="professionalObjective"
             id={proObjTextAreaId}
-            rows={5}
+            rows={10}
             value={professionalObjective}
             onChange={handleProObjChange}
           ></textarea>
