@@ -20,6 +20,10 @@ h3 {
   font-size: 1.25rem;
 }
 
+legend {
+  margin: 0.5rem 0;
+}
+
 strong {
   font-weight: bold;
 }
@@ -54,7 +58,8 @@ label {
 }
 
 input,
-textarea {
+textarea,
+select {
   display: block;
   border: 1px solid grey;
   border-radius: 0.5rem;

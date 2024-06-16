@@ -4,6 +4,7 @@ import { CVData, CVAction, Experience, ExpType } from "../useCVReducer";
 import yearStrToNumber from "../utils/yearStrToNumber";
 import months from "../utils/monthsArray";
 import { v4 as uuid } from "uuid";
+import styles from "../styles/ExpForm.module.css";
 
 enum InputNames {
   Location = "location",
@@ -149,12 +150,12 @@ export default function ExpForm({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <legend>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h3>
         {isAcademic ? "Adicionar curso" : "Adicionar experiência profissional"}
-      </legend>
+      </h3>
 
-      <div>
+      <div className={styles.formRow}>
         <label htmlFor={locationInputId}>
           Nome da {isAcademic ? "instituição" : "Empresa"}:
         </label>
@@ -176,7 +177,7 @@ export default function ExpForm({
         />
       </div>
 
-      <div>
+      <div className={styles.formRow}>
         <label htmlFor={titleInputId}>Nome do curso:</label>
         <input
           type="text"
@@ -199,78 +200,93 @@ export default function ExpForm({
       <fieldset>
         <legend>Data de início</legend>
 
-        <label htmlFor={startMonthInputId}>Mês:</label>
-        <select
-          name={InputNames.StartMonth}
-          id={startMonthInputId}
-          value={formState.startMonth}
-          onChange={(e) =>
-            formDispatch({
-              inputName: InputNames.StartMonth,
-              value: e.target.value,
-            })
-          }
-        >
-          {monthsOptionsElements}
-        </select>
+        <div className={styles.dateInputs}>
+          <div className={styles.formRow}>
+            <label htmlFor={startMonthInputId}>Mês:</label>
+            <select
+              name={InputNames.StartMonth}
+              id={startMonthInputId}
+              value={formState.startMonth}
+              onChange={(e) =>
+                formDispatch({
+                  inputName: InputNames.StartMonth,
+                  value: e.target.value,
+                })
+              }
+            >
+              {monthsOptionsElements}
+            </select>
+          </div>
+          <div className={styles.formRow}>
+            <label htmlFor={startYearInputId}>Ano:</label>
+            <input
+              type="number"
+              name={InputNames.StartYear}
+              id={startYearInputId}
+              required
+              min={1900}
+              value={formState.startYear}
+              onChange={(e) =>
+                formDispatch({
+                  inputName: InputNames.StartYear,
+                  value: e.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
 
-        <label htmlFor={startYearInputId}>Ano:</label>
-        <input
-          type="number"
-          name={InputNames.StartYear}
-          id={startYearInputId}
-          required
-          min={1900}
-          value={formState.startYear}
-          onChange={(e) =>
-            formDispatch({
-              inputName: InputNames.StartYear,
-              value: e.target.value,
-            })
-          }
-        />
-
-        <p>{startYearError}</p>
+        <p className={styles.error}>
+          <i>{startYearError}</i>
+        </p>
       </fieldset>
 
       <fieldset>
         <legend>Data de conclusão (ou previsão):</legend>
 
-        <label htmlFor={endMonthInputId}>Mês:</label>
-        <select
-          name={InputNames.EndMonth}
-          id={endMonthInputId}
-          value={formState.endMonth}
-          onChange={(e) =>
-            formDispatch({
-              inputName: InputNames.EndMonth,
-              value: e.target.value,
-            })
-          }
-        >
-          {monthsOptionsElements}
-        </select>
+        <div className={styles.dateInputs}>
+          <div className={styles.formRow}>
+            <label htmlFor={endMonthInputId}>Mês:</label>
+            <select
+              name={InputNames.EndMonth}
+              id={endMonthInputId}
+              value={formState.endMonth}
+              onChange={(e) =>
+                formDispatch({
+                  inputName: InputNames.EndMonth,
+                  value: e.target.value,
+                })
+              }
+            >
+              {monthsOptionsElements}
+            </select>
+          </div>
 
-        <label htmlFor={endYearInputId}>Ano:</label>
-        <input
-          type="number"
-          name={InputNames.EndYear}
-          id={endYearInputId}
-          required
-          min={1900}
-          value={formState.endYear}
-          onChange={(e) =>
-            formDispatch({
-              inputName: InputNames.EndYear,
-              value: e.target.value,
-            })
-          }
-        />
+          <div className={styles.formRow}>
+            <label htmlFor={endYearInputId}>Ano:</label>
+            <input
+              type="number"
+              name={InputNames.EndYear}
+              id={endYearInputId}
+              required
+              min={1900}
+              value={formState.endYear}
+              onChange={(e) =>
+                formDispatch({
+                  inputName: InputNames.EndYear,
+                  value: e.target.value,
+                })
+              }
+            />
+          </div>
+        </div>
 
-        <p>{endYearError}</p>
+        <p className={styles.error}>
+          <i>{endYearError}</i>
+        </p>
       </fieldset>
 
-      <div>
+      <div className={styles.formRow}>
         <label htmlFor={descriptionInputId}>Descreva esta experiência:</label>
         <textarea
           name={InputNames.Description}
@@ -286,13 +302,17 @@ export default function ExpForm({
         ></textarea>
       </div>
 
-      <button
-        type="button"
-        onClick={() => expGroupDispatch({ type: "CLOSE_FORM" })}
-      >
-        Cancelar
-      </button>
-      <button type="submit">Salvar</button>
+      <div className={styles.buttons}>
+        <button
+          type="button"
+          onClick={() => expGroupDispatch({ type: "CLOSE_FORM" })}
+        >
+          Cancelar
+        </button>
+        <button className="ok" type="submit">
+          Salvar
+        </button>
+      </div>
     </form>
   );
 }
