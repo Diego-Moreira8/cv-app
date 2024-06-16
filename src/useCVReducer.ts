@@ -1,5 +1,6 @@
 import { useReducer } from "react";
 import { v4 as uuid } from "uuid";
+import { mockCV } from "./mockCV";
 
 export enum ExpType {
   Academic = "ACADEMIC",
@@ -225,6 +226,6 @@ function cvReducer(state: CVData, action: CVAction) {
 }
 
 export default function useCVReducer() {
-  const [cvState, cvDispatch] = useReducer(cvReducer, INITIAL_CV);
+  const [cvState, cvDispatch] = useReducer(cvReducer, mockCV);
   return { cvState, cvDispatch };
 }
