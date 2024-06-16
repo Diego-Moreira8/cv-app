@@ -24,3 +24,21 @@ strong {
 i {
   font-style: italic;
 }
+
+button {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  display: block;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: none;
+}

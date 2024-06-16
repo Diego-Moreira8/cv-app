@@ -10,8 +10,9 @@ export default function Group({ title, children }: GroupProps) {
     <div className={styles.container}>
       <button className={styles.headerButton} type="button">
         <h2>{title}</h2>
+        <span>&#x25b2;</span>
       </button>
-      <div>{children}</div>
+      <div className={styles.content}>{children}</div>
     </div>
   );
 }
