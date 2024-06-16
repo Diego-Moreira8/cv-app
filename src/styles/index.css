@@ -16,6 +16,9 @@ h1 {
 h2 {
   font-size: 1.5rem;
 }
+h3 {
+  font-size: 1.25rem;
+}
 
 strong {
   font-weight: bold;
@@ -26,13 +29,24 @@ i {
 }
 
 button {
-  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
   border: 1px solid grey;
   border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
   font-family: inherit;
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
+}
+button.ok {
+  background-color: green;
+  border: 1px solid green;
+  color: white;
+}
+button.danger {
+  background-color: darkred;
+  border: 1px solid darkred;
+  color: white;
 }
 
 label {
@@ -55,5 +69,10 @@ textarea {
 
 hr {
   border: 1px solid lightgray;
-  margin: 1rem 0;
+  margin: 2rem 0;
+}
+
+p {
+  margin: 0.75rem 0;
+  line-height: 1.5;
 }

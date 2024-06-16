@@ -1,7 +1,6 @@
 .inputRow {
   display: flex;
   align-items: stretch;
-  gap: 0.5rem;
   margin-top: 0.5rem;
 }
 

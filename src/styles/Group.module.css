@@ -6,11 +6,13 @@
 }
 
 .headerButton {
-  background-color: transparent;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  width: 100%;
+  background-color: rgb(180, 205, 218);
+  margin: 0;
   border: none;
   border-radius: 1rem 1rem 0 0;
   padding: 1rem 1.5rem;
