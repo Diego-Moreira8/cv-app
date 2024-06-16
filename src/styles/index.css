@@ -29,6 +29,10 @@ button {
   cursor: pointer;
 }
 
+label {
+  display: block;
+}
+
 input,
 textarea {
   display: block;

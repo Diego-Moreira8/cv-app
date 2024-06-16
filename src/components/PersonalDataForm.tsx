@@ -2,6 +2,7 @@ import { useId } from "react";
 import Group from "./Group";
 import { CVAction, CVData } from "../useCVReducer";
 import FormWrapper from "./FromWrapper";
+import styles from "../styles/PersonalDataForm.module.css";
 
 type PersonalDataFormProps = {
   cvState: CVData;
@@ -38,7 +39,7 @@ export default function PersonalDataForm({
   return (
     <Group title="Dados pessoais">
       <FormWrapper>
-        <div>
+        <div className={styles.formRow}>
           <label htmlFor={fullNameInputId}>Nome completo:</label>
           <input
             type="text"
@@ -50,7 +51,7 @@ export default function PersonalDataForm({
           />
         </div>
 
-        <div>
+        <div className={styles.formRow}>
           <label htmlFor={locationInputId}>Localização:</label>
           <input
             type="text"
@@ -62,7 +63,7 @@ export default function PersonalDataForm({
           />
         </div>
 
-        <div>
+        <div className={styles.formRow}>
           <label htmlFor={phoneInputId}>Celular:</label>
           <input
             type="text"
@@ -74,7 +75,7 @@ export default function PersonalDataForm({
           />
         </div>
 
-        <div>
+        <div className={styles.formRow}>
           <label htmlFor={emailInputId}>E-mail:</label>
           <input
             type="email"
