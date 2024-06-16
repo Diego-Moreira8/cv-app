@@ -2,6 +2,7 @@ import { useId } from "react";
 import Group from "./Group";
 import { CVAction, CVData } from "../useCVReducer";
 import FormWrapper from "./FromWrapper";
+import styles from "../styles/OnlineProfilesForm.module.css";
 
 type OnlineProfilesFormProps = {
   cvState: CVData;
@@ -36,7 +37,7 @@ export default function OnlineProfilesForm({
   return (
     <Group title="Perfis online">
       <FormWrapper>
-        <div>
+        <div className={styles.formRow}>
           <label htmlFor={portfolioURLInputId}>Portfolio:</label>
           <input
             type="text"
@@ -52,30 +53,36 @@ export default function OnlineProfilesForm({
           <label htmlFor={gitHubUsernameInputId}>
             GitHub (apenas nome de usuário):
           </label>
-          <p>github.com/</p>
-          <input
-            type="text"
-            name="github"
-            id={gitHubUsernameInputId}
-            placeholder="JoaoSilva8"
-            value={gitHubUsername}
-            onChange={handleGitHubUsernameChange}
-          />
+          <div className={styles.formRow}>
+            <label htmlFor={gitHubUsernameInputId}>github.com/</label>
+            <input
+              type="text"
+              name="github"
+              id={gitHubUsernameInputId}
+              placeholder="JoaoSilva8"
+              value={gitHubUsername}
+              onChange={handleGitHubUsernameChange}
+            />
+          </div>
         </div>
 
         <div>
           <label htmlFor={linkedInUsernameInputId}>
             LinkedIn (apenas nome de usuário):
           </label>
-          <p>www.linkedin.com/in/</p>
-          <input
-            type="text"
-            name="linkedin"
-            id={linkedInUsernameInputId}
-            placeholder="JoaoSilva8"
-            value={linkedInUsername}
-            onChange={handleLinkedInUsernameChange}
-          />
+          <div className={styles.formRow}>
+            <label htmlFor={linkedInUsernameInputId}>
+              www.linkedin.com/in/
+            </label>
+            <input
+              type="text"
+              name="linkedin"
+              id={linkedInUsernameInputId}
+              placeholder="JoaoSilva8"
+              value={linkedInUsername}
+              onChange={handleLinkedInUsernameChange}
+            />
+          </div>
         </div>
       </FormWrapper>
     </Group>
