@@ -6,7 +6,7 @@ type TechsListProps = {
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function TechsList({ cvState, cvDispatch }: TechsListProps) {
+function TechsList({ cvState, cvDispatch }: TechsListProps) {
   const techItems = cvState.techs.map((t) => (
     <li key={t.id}>
       <button type="button" onClick={() => handleDeleteTech(t.id)}>
@@ -34,3 +34,5 @@ export default function TechsList({ cvState, cvDispatch }: TechsListProps) {
     </div>
   );
 }
+
+export { TechsList };

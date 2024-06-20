@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 import { v4 as uuid } from "uuid";
-import { mockCV } from "./mockCV";
+import { mockCV } from "./utils/mockCV";
 
-export enum ExpType {
+enum ExpType {
   Academic = "ACADEMIC",
   Professional = "PROFESSIONAL",
 }
@@ -22,7 +22,7 @@ type OnlineProfiles = {
 
 type Tech = { id: string; name: string };
 
-export type Experience = {
+type Experience = {
   id: string;
   location: string;
   title: string;
@@ -33,7 +33,7 @@ export type Experience = {
   description: string;
 };
 
-export type CVData = {
+type CVData = {
   personalData: PersonalData;
   onlineProfiles: OnlineProfiles;
   professionalObjective: string;
@@ -42,7 +42,7 @@ export type CVData = {
   professionalExps: Experience[];
 };
 
-export type CVAction =
+type CVAction =
   | {
       type: "SET_NAME";
       value: string;
@@ -225,7 +225,10 @@ function cvReducer(state: CVData, action: CVAction) {
   }
 }
 
-export default function useCVReducer() {
+function useCVReducer() {
   const [cvState, cvDispatch] = useReducer(cvReducer, mockCV);
   return { cvState, cvDispatch };
 }
+
+export { useCVReducer, ExpType };
+export type { Experience, CVData, CVAction };

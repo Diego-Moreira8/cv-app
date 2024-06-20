@@ -7,7 +7,7 @@ type AddTechFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
+function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
   const [inputError, setInputError] = useState("");
 
   const newTechInputId = useId();
@@ -58,3 +58,5 @@ export default function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
     </form>
   );
 }
+
+export { AddTechForm };

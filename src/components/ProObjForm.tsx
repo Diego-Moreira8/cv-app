@@ -1,7 +1,7 @@
 import { useId } from "react";
-import Group from "./Group";
+import { Group } from "./Group";
 import { CVAction, CVData } from "../useCVReducer";
-import FormWrapper from "./FromWrapper";
+import { FormWrapper } from "./FromWrapper";
 import styles from "../styles/ProObjForm.module.css";
 
 type ProObjFormProps = {
@@ -9,7 +9,7 @@ type ProObjFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function ProObjForm({ cvState, cvDispatch }: ProObjFormProps) {
+function ProObjForm({ cvState, cvDispatch }: ProObjFormProps) {
   const { professionalObjective } = cvState;
 
   const proObjTextAreaId = useId();
@@ -40,3 +40,5 @@ export default function ProObjForm({ cvState, cvDispatch }: ProObjFormProps) {
     </Group>
   );
 }
+
+export { ProObjForm };

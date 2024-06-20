@@ -1,12 +1,12 @@
+import { PersonalDataForm } from "./PersonalDataForm";
+import { OnlineProfilesForm } from "./OnlineProfilesForm";
+import { ProObjForm } from "./ProObjForm";
+import { Techs } from "./Techs";
+import { ExpGroup } from "./ExpGroup";
+import { useCVReducer, ExpType } from "../useCVReducer";
 import styles from "../styles/CVForms.module.css";
-import PersonalDataForm from "./PersonalDataForm";
-import OnlineProfilesForm from "./OnlineProfilesForm";
-import ProObjForm from "./ProObjForm";
-import Techs from "./Techs";
-import useCVReducer, { ExpType } from "../useCVReducer";
-import ExpGroup from "./ExpGroup";
 
-export default function CVForms() {
+function CVForms() {
   const { cvState, cvDispatch } = useCVReducer();
 
   return (
@@ -28,3 +28,5 @@ export default function CVForms() {
     </div>
   );
 }
+
+export { CVForms };

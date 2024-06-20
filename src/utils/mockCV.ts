@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { CVData } from "./useCVReducer";
 
-export const mockCV: CVData = {
+const mockCV: CVData = {
   personalData: {
     name: "Diego Moreira de Oliveira",
     email: "diego.moreira529@gmail.com",
@@ -92,3 +92,5 @@ export const mockCV: CVData = {
     },
   ],
 };
+
+export { mockCV };

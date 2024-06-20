@@ -5,7 +5,7 @@ type GroupProps = {
   children: React.ReactNode;
 };
 
-export default function Group({ title, children }: GroupProps) {
+function Group({ title, children }: GroupProps) {
   return (
     <div className={styles.container}>
       <button className={styles.headerButton} type="button">
@@ -16,3 +16,5 @@ export default function Group({ title, children }: GroupProps) {
     </div>
   );
 }
+
+export { Group };

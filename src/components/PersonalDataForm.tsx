@@ -1,7 +1,7 @@
 import { useId } from "react";
-import Group from "./Group";
+import { Group } from "./Group";
+import { FormWrapper } from "./FromWrapper";
 import { CVAction, CVData } from "../useCVReducer";
-import FormWrapper from "./FromWrapper";
 import styles from "../styles/PersonalDataForm.module.css";
 
 type PersonalDataFormProps = {
@@ -9,10 +9,7 @@ type PersonalDataFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function PersonalDataForm({
-  cvState,
-  cvDispatch,
-}: PersonalDataFormProps) {
+function PersonalDataForm({ cvState, cvDispatch }: PersonalDataFormProps) {
   const { name, location, phone, email } = cvState.personalData;
 
   const fullNameInputId = useId();
@@ -90,3 +87,5 @@ export default function PersonalDataForm({
     </Group>
   );
 }
+
+export { PersonalDataForm };

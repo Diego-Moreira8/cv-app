@@ -1,5 +1,5 @@
 import { CVData, CVAction, ExpType } from "../useCVReducer";
-import months from "../utils/monthsArray";
+import { months } from "../utils/monthsArray";
 import { ExpGroupActions } from "./ExpGroup";
 import styles from "../styles/ExpList.module.css";
 
@@ -10,7 +10,7 @@ type ExpListProps = {
   expGroupDispatch: React.Dispatch<ExpGroupActions>;
 };
 
-export default function ExpList({
+function ExpList({
   expType,
   cvState,
   cvDispatch,
@@ -79,3 +79,5 @@ export default function ExpList({
     </div>
   );
 }
+
+export { ExpList };

@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 import { CVData, CVAction, ExpType } from "../useCVReducer";
-import Group from "./Group";
-import ExpForm from "./ExpForm";
-import ExpList from "./ExpList";
+import { Group } from "./Group";
+import { ExpForm } from "./ExpForm";
+import { ExpList } from "./ExpList";
 
 type ExpGroupProps = {
   expType: ExpType;
@@ -12,7 +12,7 @@ type ExpGroupProps = {
 
 type ExpGroupState = { formOpen: boolean; expToEditId: string };
 
-export type ExpGroupActions =
+type ExpGroupActions =
   | { type: "CLOSE_FORM" }
   | { type: "CREATE_EXP" }
   | { type: "EDIT_EXP_BY_ID"; value: string };
@@ -30,11 +30,7 @@ function expGroupReducer(state: ExpGroupState, action: ExpGroupActions) {
   }
 }
 
-export default function ExpGroup({
-  expType,
-  cvState,
-  cvDispatch,
-}: ExpGroupProps) {
+function ExpGroup({ expType, cvState, cvDispatch }: ExpGroupProps) {
   const [expGroupState, expGroupDispatch] = useReducer(
     expGroupReducer,
     INITIAL_STATE
@@ -67,3 +63,6 @@ export default function ExpGroup({
     </Group>
   );
 }
+
+export { ExpGroup };
+export type { ExpGroupActions };

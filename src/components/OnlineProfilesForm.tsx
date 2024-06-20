@@ -1,7 +1,7 @@
 import { useId } from "react";
-import Group from "./Group";
+import { Group } from "./Group";
+import { FormWrapper } from "./FromWrapper";
 import { CVAction, CVData } from "../useCVReducer";
-import FormWrapper from "./FromWrapper";
 import styles from "../styles/OnlineProfilesForm.module.css";
 
 type OnlineProfilesFormProps = {
@@ -9,10 +9,7 @@ type OnlineProfilesFormProps = {
   cvDispatch: React.Dispatch<CVAction>;
 };
 
-export default function OnlineProfilesForm({
-  cvState,
-  cvDispatch,
-}: OnlineProfilesFormProps) {
+function OnlineProfilesForm({ cvState, cvDispatch }: OnlineProfilesFormProps) {
   const { portfolioURL, gitHubUsername, linkedInUsername } =
     cvState.onlineProfiles;
 
@@ -88,3 +85,5 @@ export default function OnlineProfilesForm({
     </Group>
   );
 }
+
+export { OnlineProfilesForm };

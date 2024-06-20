@@ -1,5 +1,7 @@
 import styles from "../styles/Header.module.css";
 
-export default function Header() {
+function Header() {
   return <header className={styles.title}>Meu currículo</header>;
 }
+
+export { Header };

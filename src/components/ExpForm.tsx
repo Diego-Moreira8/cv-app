@@ -1,8 +1,8 @@
 import { useId, useReducer, useState } from "react";
 import { ExpGroupActions } from "./ExpGroup";
 import { CVData, CVAction, Experience, ExpType } from "../useCVReducer";
-import yearStrToNumber from "../utils/yearStrToNumber";
-import months from "../utils/monthsArray";
+import { yearStrToNumber } from "../utils/yearStrToNumber";
+import { months } from "../utils/monthsArray";
 import { v4 as uuid } from "uuid";
 import styles from "../styles/ExpForm.module.css";
 
@@ -61,7 +61,7 @@ function formReducer(state: Experience, action: FormActions) {
   };
 }
 
-export default function ExpForm({
+function ExpForm({
   expType,
   cvState,
   cvDispatch,
@@ -316,3 +316,5 @@ export default function ExpForm({
     </form>
   );
 }
+
+export { ExpForm };

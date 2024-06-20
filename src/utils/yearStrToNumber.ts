@@ -1,4 +1,4 @@
-export default function yearStrToNumber(year: string): number | null {
+function yearStrToNumber(year: string): number | null {
   const trimmedYear = year.trim();
   if (!trimmedYear) return null;
 
@@ -7,3 +7,5 @@ export default function yearStrToNumber(year: string): number | null {
 
   return yearNumber;
 }
+
+export { yearStrToNumber };
