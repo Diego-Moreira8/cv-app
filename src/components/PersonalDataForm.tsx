@@ -1,7 +1,8 @@
 import { useId } from "react";
 import { Group } from "./Group";
 import { FormWrapper } from "./FromWrapper";
-import { CVAction, CVData } from "../useCVReducer";
+import { CVAction } from "../cv-reducer/Actions";
+import { CVData } from "../cv-reducer/types";
 import styles from "../styles/PersonalDataForm.module.css";
 
 type PersonalDataFormProps = {

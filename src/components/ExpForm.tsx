@@ -1,9 +1,10 @@
 import { useId, useReducer, useState } from "react";
+import { v4 as uuid } from "uuid";
 import { ExpGroupActions } from "./ExpGroup";
-import { CVData, CVAction, Experience, ExpType } from "../useCVReducer";
 import { yearStrToNumber } from "../utils/yearStrToNumber";
 import { months } from "../utils/monthsArray";
-import { v4 as uuid } from "uuid";
+import { CVAction } from "../cv-reducer/Actions";
+import { ExpType, CVData, Experience } from "../cv-reducer/types";
 import styles from "../styles/ExpForm.module.css";
 
 enum InputNames {

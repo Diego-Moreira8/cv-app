@@ -1,4 +1,5 @@
-import { CVData, CVAction } from "../useCVReducer";
+import { CVAction } from "../cv-reducer/Actions";
+import { CVData } from "../cv-reducer/types";
 import styles from "../styles/TechsList.module.css";
 
 type TechsListProps = {

@@ -1,7 +1,25 @@
 import { v4 as uuid } from "uuid";
-import { CVData } from "./useCVReducer";
+import { CVData } from "./types";
 
-const mockCV: CVData = {
+const EMPTY_CV: CVData = {
+  personalData: {
+    name: "",
+    location: "",
+    phone: "",
+    email: "",
+  },
+  onlineProfiles: {
+    portfolioURL: "",
+    gitHubUsername: "",
+    linkedInUsername: "",
+  },
+  professionalObjective: "",
+  techs: [],
+  academicExps: [],
+  professionalExps: [],
+};
+
+const MY_CV: CVData = {
   personalData: {
     name: "Diego Moreira de Oliveira",
     email: "diego.moreira529@gmail.com",
@@ -93,4 +111,7 @@ const mockCV: CVData = {
   ],
 };
 
-export { mockCV };
+const PRO_OBJ_EXAMPLE =
+  "Busco oportunidades para aplicar e expandir meus conhecimentos em um ambiente desafiador e dinâmico. Tenho interesse em contribuir de maneira significativa para o sucesso da organização, utilizando minhas habilidades de [área de atuação] e minha experiência em [principais competências], com o intuito de promover inovação, eficiência e resultados positivos. Estou comprometido(a) com o desenvolvimento contínuo e o aprimoramento das minhas capacidades profissionais, sempre buscando o crescimento mútuo e a excelência no trabalho realizado.";
+
+export { EMPTY_CV, MY_CV, PRO_OBJ_EXAMPLE };

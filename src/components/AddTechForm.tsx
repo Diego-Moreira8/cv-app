@@ -1,5 +1,6 @@
 import { useState, useId } from "react";
-import { CVData, CVAction } from "../useCVReducer";
+import { CVAction } from "../cv-reducer/Actions";
+import { CVData } from "../cv-reducer/types";
 import styles from "../styles/AddTechForm.module.css";
 
 type AddTechFormProps = {

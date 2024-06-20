@@ -1,7 +1,8 @@
 import { useId } from "react";
 import { Group } from "./Group";
-import { CVAction, CVData } from "../useCVReducer";
 import { FormWrapper } from "./FromWrapper";
+import { CVAction } from "../cv-reducer/Actions";
+import { CVData } from "../cv-reducer/types";
 import styles from "../styles/ProObjForm.module.css";
 
 type ProObjFormProps = {

@@ -1,8 +1,9 @@
 import { useReducer } from "react";
-import { CVData, CVAction, ExpType } from "../useCVReducer";
 import { Group } from "./Group";
 import { ExpForm } from "./ExpForm";
 import { ExpList } from "./ExpList";
+import { CVAction } from "../cv-reducer/Actions";
+import { ExpType, CVData } from "../cv-reducer/types";
 
 type ExpGroupProps = {
   expType: ExpType;
