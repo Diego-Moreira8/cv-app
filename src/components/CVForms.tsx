@@ -3,7 +3,7 @@ import { OnlineProfilesForm } from "./OnlineProfilesForm";
 import { ProObjForm } from "./ProObjForm";
 import { Techs } from "./Techs";
 import { ExpGroup } from "./ExpGroup";
-import { useCVReducer } from "../cv-reducer/hoook";
+import { useCVReducer } from "../cv-reducer/hook";
 import { ExpType } from "../cv-reducer/types";
 import styles from "../styles/CVForms.module.css";
 
