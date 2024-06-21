@@ -1,16 +1,13 @@
 import { useId } from "react";
 import { Group } from "./Group";
 import { FormWrapper } from "./FromWrapper";
-import { CVAction } from "../cv-reducer/Actions";
-import { CVData } from "../cv-reducer/types";
+import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import styles from "../styles/OnlineProfilesForm.module.css";
 
-type OnlineProfilesFormProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
+function OnlineProfilesForm() {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
 
-function OnlineProfilesForm({ cvState, cvDispatch }: OnlineProfilesFormProps) {
   const { portfolioURL, gitHubUsername, linkedInUsername } =
     cvState.onlineProfiles;
 

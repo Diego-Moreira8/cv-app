@@ -1,16 +1,13 @@
 import { useId } from "react";
 import { Group } from "./Group";
 import { FormWrapper } from "./FromWrapper";
-import { CVAction } from "../cv-reducer/Actions";
-import { CVData } from "../cv-reducer/types";
+import { useCVDispatch, useCVState } from "../cv-reducer/hook";
 import styles from "../styles/PersonalDataForm.module.css";
 
-type PersonalDataFormProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
+function PersonalDataForm() {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
 
-function PersonalDataForm({ cvState, cvDispatch }: PersonalDataFormProps) {
   const { name, location, phone, email } = cvState.personalData;
 
   const fullNameInputId = useId();

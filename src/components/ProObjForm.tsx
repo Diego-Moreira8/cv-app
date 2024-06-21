@@ -1,16 +1,13 @@
 import { useId } from "react";
 import { Group } from "./Group";
 import { FormWrapper } from "./FromWrapper";
-import { CVAction } from "../cv-reducer/Actions";
-import { CVData } from "../cv-reducer/types";
+import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import styles from "../styles/ProObjForm.module.css";
 
-type ProObjFormProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
+function ProObjForm() {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
 
-function ProObjForm({ cvState, cvDispatch }: ProObjFormProps) {
   const { professionalObjective } = cvState;
 
   const proObjTextAreaId = useId();

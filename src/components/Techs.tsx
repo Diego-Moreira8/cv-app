@@ -1,20 +1,13 @@
 import { Group } from "./Group";
 import { AddTechForm } from "./AddTechForm";
 import { TechsList } from "./TechsList";
-import { CVAction } from "../cv-reducer/Actions";
-import { CVData } from "../cv-reducer/types";
 
-type TechsProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
-
-function Techs({ cvState, cvDispatch }: TechsProps) {
+function Techs() {
   return (
     <Group title="Tecnologias">
-      <AddTechForm cvState={cvState} cvDispatch={cvDispatch} />
+      <AddTechForm />
       <hr />
-      <TechsList cvState={cvState} cvDispatch={cvDispatch} />
+      <TechsList />
     </Group>
   );
 }

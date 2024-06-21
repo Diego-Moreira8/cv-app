@@ -1,13 +1,10 @@
-import { CVAction } from "../cv-reducer/Actions";
-import { CVData } from "../cv-reducer/types";
+import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import styles from "../styles/TechsList.module.css";
 
-type TechsListProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
+function TechsList() {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
 
-function TechsList({ cvState, cvDispatch }: TechsListProps) {
   const techItems = cvState.techs.map((t) => (
     <li key={t.id}>
       <button type="button" onClick={() => handleDeleteTech(t.id)}>

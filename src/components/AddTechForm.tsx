@@ -1,14 +1,11 @@
 import { useState, useId } from "react";
-import { CVAction } from "../cv-reducer/Actions";
-import { CVData } from "../cv-reducer/types";
 import styles from "../styles/AddTechForm.module.css";
+import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 
-type AddTechFormProps = {
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-};
+function AddTechForm() {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
 
-function AddTechForm({ cvState, cvDispatch }: AddTechFormProps) {
   const [inputError, setInputError] = useState("");
 
   const newTechInputId = useId();
