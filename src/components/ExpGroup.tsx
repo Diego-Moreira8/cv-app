@@ -21,11 +21,11 @@ const INITIAL_STATE: ExpGroupState = { formOpen: false, expToEditId: "" };
 function expGroupReducer(state: ExpGroupState, action: ExpGroupActions) {
   switch (action.type) {
     case "CLOSE_FORM":
-      return { formOpen: false, expToEditId: "" };
+      return { ...state, formOpen: false, expToEditId: "" };
     case "CREATE_EXP":
-      return { formOpen: true, expToEditId: "" };
+      return { ...state, formOpen: true, expToEditId: "" };
     case "EDIT_EXP_BY_ID":
-      return { formOpen: true, expToEditId: action.value };
+      return { ...state, formOpen: true, expToEditId: action.value };
   }
 }
 
@@ -55,12 +55,7 @@ function ExpGroup({ expType }: ExpGroupProps) {
           expToEditId={expGroupState.expToEditId}
         />
       ) : (
-        <ExpList
-          expType={expType}
-          cvState={cvState}
-          cvDispatch={cvDispatch}
-          expGroupDispatch={expGroupDispatch}
-        />
+        <ExpList expType={expType} expGroupDispatch={expGroupDispatch} />
       )}
     </Group>
   );

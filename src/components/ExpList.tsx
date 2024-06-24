@@ -1,22 +1,18 @@
 import { months } from "../utils/monthsArray";
 import { ExpGroupActions } from "./ExpGroup";
-import { CVAction } from "../cv-reducer/actions";
-import { ExpType, CVData } from "../cv-reducer/types";
+import { ExpType } from "../cv-reducer/types";
+import { useCVDispatch, useCVState } from "../cv-reducer/hook";
 import styles from "../styles/ExpList.module.css";
 
 type ExpListProps = {
   expType: ExpType;
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
   expGroupDispatch: React.Dispatch<ExpGroupActions>;
 };
 
-function ExpList({
-  expType,
-  cvState,
-  cvDispatch,
-  expGroupDispatch,
-}: ExpListProps) {
+function ExpList({ expType, expGroupDispatch }: ExpListProps) {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
+
   const experiences =
     expType === ExpType.Academic
       ? cvState.academicExps
