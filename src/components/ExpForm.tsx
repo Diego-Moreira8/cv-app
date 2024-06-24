@@ -1,92 +1,31 @@
-import { useId, useReducer, useState } from "react";
-import { v4 as uuid } from "uuid";
+import { useState } from "react";
 import { ExpGroupActions } from "./ExpGroup";
-import { yearStrToNumber } from "../utils/yearStrToNumber";
-import { months } from "../utils/monthsArray";
-import { CVAction } from "../cv-reducer/actions";
-import { ExpType, CVData, Experience } from "../cv-reducer/types";
-import styles from "../styles/ExpForm.module.css";
 import { Input } from "./Input";
-import { Textarea } from "./Textarea";
 import { DateFieldset } from "./DateFieldset";
-
-enum InputNames {
-  Location = "location",
-  Title = "title",
-  StartMonth = "startMonth",
-  StartYear = "startYear",
-  EndMonth = "endMonth",
-  EndYear = "endYear",
-  Description = "description",
-}
+import { Textarea } from "./Textarea";
+import { yearStrToNumber } from "../utils/yearStrToNumber";
+import { ExpType } from "../cv-reducer/types";
+import { useCVState, useCVDispatch } from "../cv-reducer/hook";
+import { InputNames, useExperience } from "../exp-reducer/useExperience";
+import styles from "../styles/ExpForm.module.css";
 
 type ExpFormProps = {
   expType: ExpType;
-  cvState: CVData;
-  cvDispatch: React.Dispatch<CVAction>;
-  expGroupDispatch: React.Dispatch<ExpGroupActions>;
   expToEditId: string;
+  expGroupDispatch: React.Dispatch<ExpGroupActions>;
 };
 
-type FormActions = {
-  inputName: InputNames;
-  value: string;
-};
+function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
+  const cvState = useCVState();
+  const cvDispatch = useCVDispatch();
 
-const CURR_YEAR = new Date().getFullYear().toString();
-
-const INITIAL_EXP: Omit<Experience, "id"> = {
-  // ID will be generated on reducer creation if necessary
-  location: "",
-  title: "",
-  startMonth: 1,
-  startYear: CURR_YEAR,
-  endMonth: 1,
-  endYear: CURR_YEAR,
-  description: "",
-};
-
-function formReducer(state: Experience, action: FormActions) {
-  const { inputName, value } = action;
-
-  if (
-    inputName === InputNames.StartMonth ||
-    inputName === InputNames.EndMonth
-  ) {
-    return {
-      ...state,
-      [inputName]: parseInt(value),
-    };
-  }
-
-  return {
-    ...state,
-    [inputName]: value,
-  };
-}
-
-function ExpForm({
-  expType,
-  cvState,
-  cvDispatch,
-  expGroupDispatch,
-  expToEditId,
-}: ExpFormProps) {
-  const isAcademic = expType === ExpType.Academic;
-
-  let expToEdit = null;
-  if (expToEditId) {
-    const experiences = isAcademic
-      ? cvState.academicExps
-      : cvState.professionalExps;
-
-    expToEdit = experiences.find((exp) => exp.id === expToEditId);
-  }
-
-  const [formState, formDispatch] = useReducer(
-    formReducer,
-    expToEdit ? expToEdit : { ...INITIAL_EXP, id: uuid() }
+  const { formDispatch, formState } = useExperience(
+    expType,
+    cvState,
+    expToEditId
   );
+
+  const isAcademic = expType === ExpType.Academic;
 
   const [startYearError, setStartYearError] = useState("");
   const [endYearError, setEndYearError] = useState("");
