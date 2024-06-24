@@ -6,6 +6,7 @@ type InputProps = {
   type: "text" | "email" | "url";
   name: string;
   placeholder?: string;
+  required?: boolean;
   value: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
@@ -15,6 +16,7 @@ function Input({
   type,
   name,
   placeholder,
+  required = false,
   value,
   onChange,
 }: InputProps) {
@@ -27,6 +29,7 @@ function Input({
         name={name}
         id={id}
         placeholder={placeholder}
+        required={required}
         value={value}
         onChange={onChange}
       />

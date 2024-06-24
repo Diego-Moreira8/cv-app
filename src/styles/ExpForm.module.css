@@ -8,22 +8,6 @@
   margin-bottom: 1rem;
 }
 
-.formRow {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.dateInputs {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.dateInputs input {
-  width: 4rem;
-  flex-shrink: 1;
-}
-
 .error {
   color: darkred;
   margin: 0.25rem 0 0 0;
