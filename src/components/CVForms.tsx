@@ -8,8 +8,6 @@ import { ExpType } from "../cv-reducer/types";
 import styles from "../styles/CVForms.module.css";
 
 function CVForms() {
-  // const { cvState, cvDispatch } = useCVReducer();
-
   return (
     <CVProvider>
       <div className={styles.main}>
