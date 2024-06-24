@@ -12,8 +12,8 @@ type PersonalData = {
 
 type OnlineProfiles = {
   portfolioURL: string;
-  gitHubUsername: string;
-  linkedInUsername: string;
+  gitHubURL: string;
+  linkedInURL: string;
 };
 
 type Tech = { id: string; name: string };

@@ -1,5 +1,5 @@
 import { v4 as uuid } from "uuid";
-import { CVAction } from "./Actions";
+import { CVAction } from "./actions";
 import { CVData, ExpType } from "./types";
 
 function cvReducer(state: CVData, action: CVAction) {
@@ -39,7 +39,7 @@ function cvReducer(state: CVData, action: CVAction) {
         ...state,
         onlineProfiles: {
           ...state.onlineProfiles,
-          gitHubUsername: action.value,
+          gitHubURL: action.value,
         },
       };
     }
@@ -48,7 +48,7 @@ function cvReducer(state: CVData, action: CVAction) {
         ...state,
         onlineProfiles: {
           ...state.onlineProfiles,
-          linkedInUsername: action.value,
+          linkedInURL: action.value,
         },
       };
     }

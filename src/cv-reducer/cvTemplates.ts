@@ -10,8 +10,8 @@ const EMPTY_CV: CVData = {
   },
   onlineProfiles: {
     portfolioURL: "",
-    gitHubUsername: "",
-    linkedInUsername: "",
+    gitHubURL: "",
+    linkedInURL: "",
   },
   professionalObjective: "",
   techs: [],
@@ -28,8 +28,8 @@ const MY_CV: CVData = {
   },
   onlineProfiles: {
     portfolioURL: "https://diegomoreira.vercel.app",
-    gitHubUsername: "diego-moreira8",
-    linkedInUsername: "diego-moreira8",
+    gitHubURL: "https://github.com/Diego-Moreira8",
+    linkedInURL: "https://www.linkedin.com/in/diego-moreira8",
   },
   techs: [
     { id: uuid(), name: "HTML" },

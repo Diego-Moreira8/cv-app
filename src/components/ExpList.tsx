@@ -1,6 +1,6 @@
 import { months } from "../utils/monthsArray";
 import { ExpGroupActions } from "./ExpGroup";
-import { CVAction } from "../cv-reducer/Actions";
+import { CVAction } from "../cv-reducer/actions";
 import { ExpType, CVData } from "../cv-reducer/types";
 import styles from "../styles/ExpList.module.css";
 

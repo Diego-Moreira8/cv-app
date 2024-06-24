@@ -2,7 +2,7 @@ import { ReactNode, createContext, useContext, useReducer } from "react";
 import { MY_CV } from "./cvTemplates";
 import { cvReducer } from "./reducer";
 import { CVData } from "./types";
-import { CVAction } from "./Actions";
+import { CVAction } from "./actions";
 
 const CVStateContext = createContext<CVData | undefined>(undefined);
 const CVDispatchContext = createContext<React.Dispatch<CVAction> | undefined>(

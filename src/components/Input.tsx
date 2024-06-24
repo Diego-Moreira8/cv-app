@@ -3,7 +3,7 @@ import styles from "../styles/Input.module.css";
 
 type InputProps = {
   label: string;
-  type: "text" | "email";
+  type: "text" | "email" | "url";
   name: string;
   placeholder?: string;
   value: string;

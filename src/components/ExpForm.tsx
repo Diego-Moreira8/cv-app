@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 import { ExpGroupActions } from "./ExpGroup";
 import { yearStrToNumber } from "../utils/yearStrToNumber";
 import { months } from "../utils/monthsArray";
-import { CVAction } from "../cv-reducer/Actions";
+import { CVAction } from "../cv-reducer/actions";
 import { ExpType, CVData, Experience } from "../cv-reducer/types";
 import styles from "../styles/ExpForm.module.css";
 

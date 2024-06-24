@@ -1,6 +1,6 @@
 import { useState, useId } from "react";
-import styles from "../styles/AddTechForm.module.css";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
+import styles from "../styles/AddTechForm.module.css";
 
 function AddTechForm() {
   const cvState = useCVState();
