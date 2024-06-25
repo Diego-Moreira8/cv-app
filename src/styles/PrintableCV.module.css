@@ -15,7 +15,7 @@
 
 .container p {
   text-align: justify;
-  margin: 0.5em 0;
+  margin: 0.25em 0;
 }
 
 .personalDataList,
@@ -37,6 +37,12 @@
   columns: 3;
 }
 
-.expList > li {
+.expList > dt {
+  margin-bottom: 0.25rem;
+}
+
+.expList > dd {
+  padding-left: 1rem;
+  line-height: 1.5;
   margin-bottom: 1em;
 }

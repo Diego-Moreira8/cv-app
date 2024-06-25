@@ -86,18 +86,17 @@ function PersonalDataList() {
 function ExperienceList({ experiences }: { experiences: Experience[] }) {
   return (
     <>
-      <ul className={styles.expList}>
+      <dl className={styles.expList}>
         {experiences.map((exp) => (
-          <li key={exp.id}>
-            <p>
-              <b>
-                {exp.title} | {exp.location} | <ExpPeriod exp={exp} />
-              </b>
-            </p>
-            <p>{exp.description}</p>
-          </li>
+          <>
+            <dt>
+              <b>{exp.title}</b> | {exp.location} | <ExpPeriod exp={exp} />
+            </dt>
+
+            <dd>{exp.description}</dd>
+          </>
         ))}
-      </ul>
+      </dl>
     </>
   );
 }
