@@ -56,6 +56,7 @@ const MY_CV: CVData = {
       id: "1",
       title: "Técnico em Informática",
       location: "Faculdade Una",
+      inProgress: true,
       startMonth: 5,
       startYear: "2021",
       endMonth: 6,

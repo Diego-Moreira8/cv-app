@@ -8,6 +8,7 @@ import { ExpType } from "../cv-reducer/types";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import { InputNames, useExperience } from "../exp-reducer/useExperience";
 import styles from "../styles/ExpForm.module.css";
+import { Checkbox } from "./Checkbox";
 
 type ExpFormProps = {
   expType: ExpType;
@@ -55,7 +56,7 @@ function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
       (endYearNumber === startYearNumber &&
         formState.endMonth < formState.startMonth);
 
-    if (endsBeforeStart) {
+    if (!formState.inProgress && endsBeforeStart) {
       setEndYearError("A data de conclusão não pode ser anterior à de início");
       return;
     }
@@ -138,28 +139,44 @@ function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
         yearError={startYearError}
       />
 
-      <DateFieldset
-        legend={
-          isAcademic ? "Data de conclusão (ou previsão):" : "Data de saída:"
-        }
-        monthInputName={InputNames.EndMonth}
-        monthValue={formState.endMonth}
-        onMonthChange={(e) =>
-          formDispatch({
-            inputName: InputNames.EndMonth,
-            value: e.target.value,
-          })
-        }
-        yearInputName={InputNames.EndYear}
-        yearValue={formState.endYear}
-        onYearChange={(e) =>
-          formDispatch({
-            inputName: InputNames.EndYear,
-            value: e.target.value,
-          })
-        }
-        yearError={endYearError}
-      />
+      {!isAcademic && (
+        <Checkbox
+          label="Ainda trabalho aqui"
+          name="expInProgress"
+          checked={!!formState.inProgress}
+          onChange={(e) =>
+            formDispatch({
+              inputName: InputNames.InProgress,
+              value: e.target.checked,
+            })
+          }
+        />
+      )}
+
+      {!formState.inProgress && (
+        <DateFieldset
+          legend={
+            isAcademic ? "Data de conclusão (ou previsão)" : "Data de saída"
+          }
+          monthInputName={InputNames.EndMonth}
+          monthValue={formState.endMonth}
+          onMonthChange={(e) =>
+            formDispatch({
+              inputName: InputNames.EndMonth,
+              value: e.target.value,
+            })
+          }
+          yearInputName={InputNames.EndYear}
+          yearValue={formState.endYear}
+          onYearChange={(e) =>
+            formDispatch({
+              inputName: InputNames.EndYear,
+              value: e.target.value,
+            })
+          }
+          yearError={endYearError}
+        />
+      )}
 
       <Textarea
         label="Descreva esta experiência:"

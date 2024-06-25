@@ -3,7 +3,6 @@ import { Group } from "./Group";
 import { ExpForm } from "./ExpForm";
 import { ExpList } from "./ExpList";
 import { ExpType } from "../cv-reducer/types";
-import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 
 type ExpGroupProps = {
   expType: ExpType;
@@ -30,9 +29,6 @@ function expGroupReducer(state: ExpGroupState, action: ExpGroupActions) {
 }
 
 function ExpGroup({ expType }: ExpGroupProps) {
-  const cvState = useCVState();
-  const cvDispatch = useCVDispatch();
-
   const [expGroupState, expGroupDispatch] = useReducer(
     expGroupReducer,
     INITIAL_STATE
@@ -49,8 +45,6 @@ function ExpGroup({ expType }: ExpGroupProps) {
       {expGroupState.formOpen ? (
         <ExpForm
           expType={expType}
-          cvState={cvState}
-          cvDispatch={cvDispatch}
           expGroupDispatch={expGroupDispatch}
           expToEditId={expGroupState.expToEditId}
         />

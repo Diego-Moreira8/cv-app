@@ -22,6 +22,7 @@ type Experience = {
   id: string;
   location: string;
   title: string;
+  inProgress?: boolean;
   startMonth: number;
   startYear: string;
   endMonth: number;

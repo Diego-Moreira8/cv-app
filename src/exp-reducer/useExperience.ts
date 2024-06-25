@@ -5,6 +5,7 @@ import { CVData, ExpType, Experience } from "../cv-reducer/types";
 enum InputNames {
   Location = "location",
   Title = "title",
+  InProgress = "inProgress",
   StartMonth = "startMonth",
   StartYear = "startYear",
   EndMonth = "endMonth",
@@ -12,10 +13,15 @@ enum InputNames {
   Description = "description",
 }
 
-type FormActions = {
-  inputName: InputNames;
-  value: string;
-};
+type FormActions =
+  | {
+      inputName: InputNames;
+      value: string;
+    }
+  | {
+      inputName: InputNames.InProgress;
+      value: boolean;
+    };
 
 const CURR_YEAR = new Date().getFullYear().toString();
 
@@ -39,6 +45,13 @@ function expReducer(state: Experience, action: FormActions) {
     return {
       ...state,
       [inputName]: parseInt(value),
+    };
+  }
+
+  if (inputName === InputNames.InProgress) {
+    return {
+      ...state,
+      inProgress: !!value,
     };
   }
 

@@ -1,6 +1,6 @@
 import { months } from "../utils/monthsArray";
 import { ExpGroupActions } from "./ExpGroup";
-import { ExpType } from "../cv-reducer/types";
+import { ExpType, Experience } from "../cv-reducer/types";
 import { useCVDispatch, useCVState } from "../cv-reducer/hook";
 import styles from "../styles/ExpList.module.css";
 
@@ -51,10 +51,7 @@ function ExpList({ expType, expGroupDispatch }: ExpListProps) {
 
             <p>{exp.location}</p>
 
-            <p>
-              De {months[exp.startMonth - 1].toLowerCase()}/{exp.startYear} até{" "}
-              {months[exp.endMonth - 1].toLowerCase()}/{exp.endYear}
-            </p>
+            <Period exp={exp} />
 
             <p>{exp.description}</p>
 
@@ -62,6 +59,7 @@ function ExpList({ expType, expGroupDispatch }: ExpListProps) {
               <button type="button" onClick={() => handleEdit(exp.id)}>
                 Editar
               </button>
+
               <button
                 className="danger"
                 type="button"
@@ -74,6 +72,19 @@ function ExpList({ expType, expGroupDispatch }: ExpListProps) {
         ))}
       </ul>
     </div>
+  );
+}
+
+function Period({ exp }: { exp: Experience }) {
+  return exp.inProgress ? (
+    <p>
+      Desde {months[exp.startMonth - 1].toLowerCase()}/{exp.startYear}
+    </p>
+  ) : (
+    <p>
+      De {months[exp.startMonth - 1].toLowerCase()}/{exp.startYear} até{" "}
+      {months[exp.endMonth - 1].toLowerCase()}/{exp.endYear}
+    </p>
   );
 }
 

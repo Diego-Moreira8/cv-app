@@ -1,0 +1,14 @@
+.checkboxRow {
+  display: flex;
+  align-items: center;
+}
+
+.checkboxRow > input {
+  --size: 1.3rem;
+  width: var(--size);
+  height: var(--size);
+}
+
+.checkboxRow > label {
+  padding: 0.2rem 0 0 0.5rem;
+}
