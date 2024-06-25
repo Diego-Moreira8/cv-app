@@ -5,7 +5,7 @@ import styles from "./styles/App.module.css";
 
 function App() {
   return (
-    <div className={styles.app}>
+    <div className={styles.app} id="app">
       <Header />
       <CVForms />
       <Footer />
