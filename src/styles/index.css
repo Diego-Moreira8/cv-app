@@ -24,7 +24,8 @@ legend {
   margin: 0.5rem 0;
 }
 
-strong {
+strong,
+b {
   font-weight: bold;
 }
 
@@ -88,5 +89,14 @@ p {
   }
   #printable {
     display: block;
+  }
+}
+
+@media screen {
+  #app {
+    display: block;
+  }
+  #printable {
+    display: none;
   }
 }

@@ -1,0 +1,42 @@
+.container {
+  font-size: 12px;
+}
+
+.container h1 {
+  margin: 0 0 1em 0;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.container h2 {
+  margin: 2em 0 1em 0;
+  font-size: 1.25em;
+}
+
+.container p {
+  text-align: justify;
+  margin: 0.5em 0;
+}
+
+.personalDataList,
+.techs {
+  list-style: inside;
+  margin: 0.5em 1em;
+}
+
+.container li {
+  margin-bottom: 0.5em;
+}
+
+.container a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.techs {
+  columns: 3;
+}
+
+.expList > li {
+  margin-bottom: 1em;
+}

@@ -23,7 +23,7 @@ const MY_CV: CVData = {
   personalData: {
     name: "Diego Moreira de Oliveira",
     email: "diego.moreira529@gmail.com",
-    location: "Catalão-GO",
+    location: "Catalão - Goiás",
     phone: "(64) 99338-0234",
   },
   onlineProfiles: {
