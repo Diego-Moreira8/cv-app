@@ -1,8 +1,9 @@
+import { Fragment } from "react";
 import { useCVState } from "../cv-reducer/hook";
 import { Experience } from "../cv-reducer/types";
 import { ExpPeriod } from "./ExpPeriod";
-import styles from "../styles/PrintableCV.module.css";
 import { removeHttp } from "../utils/removeHttp";
+import styles from "../styles/PrintableCV.module.css";
 
 function PrintableCV() {
   const {
@@ -89,13 +90,13 @@ function ExperienceList({ experiences }: { experiences: Experience[] }) {
     <>
       <dl className={styles.expList}>
         {experiences.map((exp) => (
-          <>
+          <Fragment key={exp.id}>
             <dt>
               <b>{exp.title}</b> | {exp.location} | <ExpPeriod exp={exp} />
             </dt>
 
             <dd>{exp.description}</dd>
-          </>
+          </Fragment>
         ))}
       </dl>
     </>
