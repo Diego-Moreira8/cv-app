@@ -2,6 +2,7 @@ import { useCVState } from "../cv-reducer/hook";
 import { Experience } from "../cv-reducer/types";
 import { ExpPeriod } from "./ExpPeriod";
 import styles from "../styles/PrintableCV.module.css";
+import { removeHttp } from "../utils/removeHttp";
 
 function PrintableCV() {
   const {
@@ -62,21 +63,21 @@ function PersonalDataList() {
       <li>
         <b>Portfolio: </b>
         <a href={onlineProfiles.portfolioURL} target="_blank">
-          {onlineProfiles.portfolioURL}
+          {removeHttp(onlineProfiles.portfolioURL)}
         </a>
       </li>
 
       <li>
         <b>LinkedIn: </b>
         <a href={onlineProfiles.linkedInURL} target="_blank">
-          {onlineProfiles.linkedInURL}
+          {removeHttp(onlineProfiles.linkedInURL)}
         </a>
       </li>
 
       <li>
         <b>GitHub: </b>
         <a href={onlineProfiles.gitHubURL} target="_blank">
-          {onlineProfiles.gitHubURL}
+          {removeHttp(onlineProfiles.gitHubURL)}
         </a>
       </li>
     </ul>
