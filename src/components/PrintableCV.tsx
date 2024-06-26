@@ -88,7 +88,7 @@ function PersonalDataList() {
 function ExperienceList({ experiences }: { experiences: Experience[] }) {
   return (
     <>
-      <dl className={styles.expList}>
+      <dl className={styles.expDl}>
         {experiences.map((exp) => (
           <Fragment key={exp.id}>
             <dt>

@@ -37,12 +37,14 @@
   columns: 3;
 }
 
-.expList > dt {
-  margin-bottom: 0.25rem;
+.expDl > dt {
+  border-left: 2px solid #1d1d1d;
+  padding: 0.5em 0 0.25em 0.5em;
 }
 
-.expList > dd {
-  padding-left: 1rem;
-  line-height: 1.5;
+.expDl > dd {
   margin-bottom: 1em;
+  border-left: 2px solid #1d1d1d;
+  padding: 0 0 0.5em 2em;
+  line-height: 1.5;
 }
