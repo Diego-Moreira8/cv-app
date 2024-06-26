@@ -11,6 +11,8 @@ function OnlineProfilesForm() {
   return (
     <Group title="Perfis online">
       <FormWrapper>
+        <p>Copie seus links e cole-os nos campos abaixo.</p>
+
         <Input
           label="Portfolio:"
           type="url"
