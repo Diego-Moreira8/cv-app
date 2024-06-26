@@ -6,7 +6,7 @@ enum ExpType {
 type PersonalData = {
   name: string;
   location: string;
-  phone: string;
+  phone: { number: string; isWhatsApp: boolean };
   email: string;
 };
 

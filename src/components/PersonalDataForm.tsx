@@ -2,6 +2,10 @@ import { Group } from "./Group";
 import { FormWrapper } from "./FromWrapper";
 import { Input } from "./Input";
 import { useCVDispatch, useCVState } from "../cv-reducer/hook";
+import { useId } from "react";
+import { Checkbox } from "./Checkbox";
+import { PersonalData } from "../cv-reducer/types";
+import styles from "../styles/PersonalDataForm.module.css";
 
 function PersonalDataForm() {
   const cvState = useCVState();
@@ -33,15 +37,14 @@ function PersonalDataForm() {
           }
         />
 
-        <Input
-          label="Celular:"
-          type="text"
-          name="phone"
-          placeholder="(11) 98765-4321"
+        <PhoneInput
           value={phone}
-          onChange={(e) =>
+          onPhoneChange={(e) =>
             cvDispatch({ type: "SET_PHONE", value: e.target.value })
           }
+          onWhatsAppChange={(e) => {
+            cvDispatch({ type: "SET_IS_WHATSAPP", value: e.target.checked });
+          }}
         />
 
         <Input
@@ -56,6 +59,44 @@ function PersonalDataForm() {
         />
       </FormWrapper>
     </Group>
+  );
+}
+
+type PhoneInputProps = {
+  value: PersonalData["phone"];
+  onPhoneChange: React.ChangeEventHandler<HTMLInputElement>;
+  onWhatsAppChange: React.ChangeEventHandler<HTMLInputElement>;
+};
+
+function PhoneInput({
+  value,
+  onPhoneChange,
+  onWhatsAppChange,
+}: PhoneInputProps) {
+  const id = useId();
+
+  return (
+    <div className={styles.phoneInputRow}>
+      <label htmlFor={id}>Celular (apenas números):</label>
+
+      <input
+        type="text"
+        name="phone"
+        id={id}
+        placeholder="11987654321"
+        maxLength={11}
+        required
+        value={value.number}
+        onChange={onPhoneChange}
+      />
+
+      <Checkbox
+        label="É WhatsApp"
+        checked={value.isWhatsApp}
+        name="isWhatsApp"
+        onChange={onWhatsAppChange}
+      />
+    </div>
   );
 }
 

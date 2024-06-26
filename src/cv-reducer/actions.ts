@@ -14,6 +14,10 @@ type CVAction =
       value: string;
     }
   | {
+      type: "SET_IS_WHATSAPP";
+      value: boolean;
+    }
+  | {
       type: "SET_EMAIL";
       value: string;
     }

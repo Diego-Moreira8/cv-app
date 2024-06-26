@@ -1,7 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { CVAction } from "./actions";
 import { CVData, ExpType } from "./types";
-import { formatPhoneNumber } from "../utils/formatPhoneNumber";
 
 function cvReducer(state: CVData, action: CVAction) {
   switch (action.type) {
@@ -22,7 +21,16 @@ function cvReducer(state: CVData, action: CVAction) {
         ...state,
         personalData: {
           ...state.personalData,
-          phone: formatPhoneNumber(action.value),
+          phone: { ...state.personalData.phone, number: action.value },
+        },
+      };
+    }
+    case "SET_IS_WHATSAPP": {
+      return {
+        ...state,
+        personalData: {
+          ...state.personalData,
+          phone: { ...state.personalData.phone, isWhatsApp: action.value },
         },
       };
     }

@@ -1,11 +1,9 @@
 .footer {
   margin: 0;
   padding: 2rem 1rem;
-  background-color: black;
-  color: white;
   text-align: center;
 }
 
 .footer > a {
-  color: lightskyblue;
+  color: rgb(2, 94, 160);
 }

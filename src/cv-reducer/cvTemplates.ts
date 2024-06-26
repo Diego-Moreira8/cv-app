@@ -5,7 +5,7 @@ const EMPTY_CV: CVData = {
   personalData: {
     name: "",
     location: "",
-    phone: "",
+    phone: { number: "", isWhatsApp: false },
     email: "",
   },
   onlineProfiles: {
@@ -24,7 +24,7 @@ const MY_CV: CVData = {
     name: "Diego Moreira de Oliveira",
     email: "diego.moreira529@gmail.com",
     location: "Catalão - Goiás",
-    phone: "(64) 99338-0234",
+    phone: { number: "64993380234", isWhatsApp: true },
   },
   onlineProfiles: {
     portfolioURL: "https://diegomoreira.vercel.app",

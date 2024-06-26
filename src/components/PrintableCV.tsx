@@ -4,6 +4,7 @@ import { Experience } from "../cv-reducer/types";
 import { ExpPeriod } from "./ExpPeriod";
 import { removeHttp } from "../utils/removeHttp";
 import styles from "../styles/PrintableCV.module.css";
+import { formatPhoneNumber } from "../utils/formatPhoneNumber";
 
 function PrintableCV() {
   const {
@@ -74,11 +75,16 @@ function PersonalDataList() {
         </li>
       )}
 
-      {personalData.phone !== "" && (
+      {personalData.phone.number !== "" && (
         <li>
           <b>Celular: </b>
-          <a href={"tel:" + personalData.phone} target="_blank">
-            {personalData.phone}
+          <a
+            href={`${
+              personalData.phone.isWhatsApp ? "https://wa.me/+55" : "tel:"
+            }${personalData.phone.number}`}
+            target="_blank"
+          >
+            {formatPhoneNumber(personalData.phone.number)}
           </a>
         </li>
       )}
