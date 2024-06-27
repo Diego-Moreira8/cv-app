@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useReducer } from "react";
-import { EMPTY_CV } from "./cvTemplates";
+import { MY_CV } from "./cvTemplates";
 import { cvReducer } from "./reducer";
 import { CVData } from "./types";
 import { CVAction } from "./actions";
@@ -10,7 +10,7 @@ const CVDispatchContext = createContext<React.Dispatch<CVAction> | undefined>(
 );
 
 function useCVReducer() {
-  const [cvState, cvDispatch] = useReducer(cvReducer, EMPTY_CV);
+  const [cvState, cvDispatch] = useReducer(cvReducer, MY_CV);
   return { cvState, cvDispatch };
 }
 

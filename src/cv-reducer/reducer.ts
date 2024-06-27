@@ -71,10 +71,21 @@ function cvReducer(state: CVData, action: CVAction) {
       };
     }
     case "ADD_TECH": {
-      return {
+      const updatedTechs = {
         ...state,
         techs: [...state.techs, { id: uuid(), name: action.value }],
       };
+
+      updatedTechs.techs.sort((a, b) => {
+        const techA = a.name.toUpperCase();
+        const techB = b.name.toUpperCase();
+
+        if (techA < techB) return -1;
+        if (techA > techB) return 1;
+        return 0;
+      });
+
+      return updatedTechs;
     }
     case "REMOVE_TECH_BY_ID": {
       const updatedTechs = state.techs.filter((t) => t.id !== action.value);
