@@ -7,11 +7,22 @@ function TechsList() {
 
   const techItems = cvState.techs.map((t) => (
     <li key={t.id}>
-      <button type="button" onDoubleClick={() => handleDeleteTech(t.id)}>
+      <button
+        type="button"
+        onKeyDown={(e) => handleKeyPress(e, t.id)}
+        onDoubleClick={() => handleDeleteTech(t.id)}
+      >
         {t.name}
       </button>
     </li>
   ));
+
+  function handleKeyPress(e: React.KeyboardEvent, techId: string) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleDeleteTech(techId);
+    }
+  }
 
   function handleDeleteTech(id: string) {
     cvDispatch({ type: "REMOVE_TECH_BY_ID", value: id });
