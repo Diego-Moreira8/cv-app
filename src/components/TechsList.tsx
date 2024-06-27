@@ -7,7 +7,7 @@ function TechsList() {
 
   const techItems = cvState.techs.map((t) => (
     <li key={t.id}>
-      <button type="button" onClick={() => handleDeleteTech(t.id)}>
+      <button type="button" onDoubleClick={() => handleDeleteTech(t.id)}>
         {t.name}
       </button>
     </li>
@@ -21,7 +21,7 @@ function TechsList() {
     <div className={styles.techsList}>
       {techItems.length > 0 ? (
         <>
-          <p>Para apagar uma tecnologia, basta tocar/clicar nela.</p>
+          <p>Para apagar uma tecnologia, basta tocar/clicar duas vezes nela.</p>
           <ul>{techItems}</ul>
         </>
       ) : (
