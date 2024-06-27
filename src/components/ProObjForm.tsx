@@ -12,20 +12,32 @@ function ProObjForm() {
   const { ConfirmationModal, confirmAction } = useConfirmation();
 
   async function addTemplate() {
-    const confirmed = await confirmAction(
-      "Inserir um modelo irá substituir todo o texto já inserido. Tem certeza que deseja inserir?"
-    );
-
-    if (confirmed) {
+    const replace = () =>
       cvDispatch({
         type: "SET_PROFESSIONAL_OBJECTIVE",
         value: PRO_OBJ_EXAMPLE,
       });
+
+    if (cvState.professionalObjective.length === 0) {
+      replace();
+      return;
     }
+
+    const confirmed = await confirmAction(
+      "Inserir um modelo irá substituir todo o texto já inserido. Tem certeza que deseja inserir?"
+    );
+
+    if (confirmed) replace();
   }
 
-  function clear() {
-    cvDispatch({ type: "SET_PROFESSIONAL_OBJECTIVE", value: "" });
+  async function clear() {
+    const confirmed = await confirmAction(
+      "Tem certeza que deseja limpar todo o texto?"
+    );
+
+    if (confirmed) {
+      cvDispatch({ type: "SET_PROFESSIONAL_OBJECTIVE", value: "" });
+    }
   }
 
   return (
@@ -51,7 +63,12 @@ function ProObjForm() {
             Inserir um modelo
           </button>
 
-          <button className="danger" type="button" onClick={clear}>
+          <button
+            className="danger"
+            type="button"
+            onClick={clear}
+            disabled={cvState.professionalObjective.length === 0}
+          >
             Limpar
           </button>
         </div>
