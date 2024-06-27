@@ -3,10 +3,10 @@ import styles from "../styles/Modal.module.css";
 
 type ModalProps = {
   text: string;
-  responseHandler: Function;
+  onResolve: (value: boolean) => void;
 };
 
-function Modal({ text, responseHandler }: ModalProps) {
+function Modal({ text, onResolve }: ModalProps) {
   const falseBtnRef = useRef<HTMLButtonElement>(null);
   const trueBtnRef = useRef<HTMLButtonElement>(null);
 
@@ -38,7 +38,7 @@ function Modal({ text, responseHandler }: ModalProps) {
   }, []);
 
   return (
-    <div className={styles.overlay} onClick={() => responseHandler(false)}>
+    <div className={styles.overlay} onClick={() => onResolve(false)}>
       <div
         className={styles.content}
         onClick={(e) => e.stopPropagation()}
@@ -52,7 +52,7 @@ function Modal({ text, responseHandler }: ModalProps) {
             type="button"
             autoFocus
             ref={trueBtnRef}
-            onClick={() => responseHandler(false)}
+            onClick={() => onResolve(false)}
           >
             Não
           </button>
@@ -61,7 +61,7 @@ function Modal({ text, responseHandler }: ModalProps) {
             type="button"
             className="danger"
             ref={falseBtnRef}
-            onClick={() => responseHandler(true)}
+            onClick={() => onResolve(true)}
           >
             Sim
           </button>

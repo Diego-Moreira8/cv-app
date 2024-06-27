@@ -2,15 +2,26 @@ import { Group } from "./Group";
 import { FormWrapper } from "./FromWrapper";
 import { Textarea } from "./Textarea";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
+import { useConfirmation } from "../hooks/useConfirmation";
 import { PRO_OBJ_EXAMPLE } from "../cv-reducer/cvTemplates";
 import styles from "../styles/ProObjForm.module.css";
 
 function ProObjForm() {
   const cvState = useCVState();
   const cvDispatch = useCVDispatch();
+  const { ConfirmationModal, confirmAction } = useConfirmation();
 
-  function addTemplate() {
-    cvDispatch({ type: "SET_PROFESSIONAL_OBJECTIVE", value: PRO_OBJ_EXAMPLE });
+  async function addTemplate() {
+    const confirmed = await confirmAction(
+      "Inserir um modelo irá substituir todo o texto já inserido. Tem certeza que deseja inserir?"
+    );
+
+    if (confirmed) {
+      cvDispatch({
+        type: "SET_PROFESSIONAL_OBJECTIVE",
+        value: PRO_OBJ_EXAMPLE,
+      });
+    }
   }
 
   function clear() {
@@ -20,6 +31,8 @@ function ProObjForm() {
   return (
     <Group title="Objetivo profissional">
       <FormWrapper>
+        {ConfirmationModal()}
+
         <Textarea
           label="Este é o lugar onde você pode comunicar seus objetivos de carreira de forma clara e concisa."
           name="professionalObjective"

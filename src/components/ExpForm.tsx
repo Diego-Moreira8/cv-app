@@ -3,12 +3,12 @@ import { ExpGroupActions } from "./ExpGroup";
 import { Input } from "./Input";
 import { DateFieldset } from "./DateFieldset";
 import { Textarea } from "./Textarea";
+import { Checkbox } from "./Checkbox";
 import { yearStrToNumber } from "../utils/yearStrToNumber";
 import { ExpType } from "../cv-reducer/types";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
-import { InputNames, useExperience } from "../exp-reducer/useExperience";
+import { InputNames, useExperience } from "../hooks/useExperience";
 import styles from "../styles/ExpForm.module.css";
-import { Checkbox } from "./Checkbox";
 
 type ExpFormProps = {
   expType: ExpType;
