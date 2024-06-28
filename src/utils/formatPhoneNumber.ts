@@ -1,7 +1,8 @@
-function formatPhoneNumber(phone: string) {
-  // Converts a string of numbers to a brazillian phone format:
-  // (11) 98765-4321
+/**
+ * Converts a string of numbers to a brazilian phone format: (11) 98765-4321
+ */
 
+function formatPhoneNumber(phone: string) {
   let newPhone;
 
   // Removes any NaN character

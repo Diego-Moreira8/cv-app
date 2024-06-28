@@ -5,6 +5,7 @@ import { ExpPeriod } from "./ExpPeriod";
 import { removeHttp } from "../utils/removeHttp";
 import styles from "../styles/PrintableCV.module.css";
 import { formatPhoneNumber } from "../utils/formatPhoneNumber";
+import { validateUrl } from "../utils/validateUrl";
 
 function PrintableCV() {
   const {
@@ -56,62 +57,67 @@ function PrintableCV() {
 }
 
 function PersonalDataList() {
-  const { personalData, onlineProfiles } = useCVState();
+  const {
+    personalData: {
+      location,
+      email,
+      phone: { number, isWhatsApp },
+    },
+    onlineProfiles: { gitHubURL, linkedInURL, portfolioURL },
+  } = useCVState();
 
   return (
     <ul className={styles.personalDataList}>
-      {personalData.location !== "" && (
+      {location !== "" && (
         <li>
-          <b>{personalData.location}</b>
+          <b>{location}</b>
         </li>
       )}
 
-      {personalData.email !== "" && (
+      {email !== "" && (
         <li>
           <b>E-mail: </b>
-          <a href={"mailto:" + personalData.email} target="_blank">
-            {personalData.email}
+          <a href={"mailto:" + email} target="_blank">
+            {email}
           </a>
         </li>
       )}
 
-      {personalData.phone.number !== "" && (
+      {number !== "" && (
         <li>
           <b>Celular: </b>
           <a
-            href={`${
-              personalData.phone.isWhatsApp ? "https://wa.me/+55" : "tel:"
-            }${personalData.phone.number}`}
+            href={`${isWhatsApp ? "https://wa.me/+55" : "tel:"}${number}`}
             target="_blank"
           >
-            {formatPhoneNumber(personalData.phone.number)}
+            {formatPhoneNumber(number)}
           </a>
         </li>
       )}
 
-      {onlineProfiles.portfolioURL !== "" && (
+      {portfolioURL !== "" && (
         <li>
           <b>Portfolio: </b>
-          <a href={onlineProfiles.portfolioURL} target="_blank">
-            {removeHttp(onlineProfiles.portfolioURL)}
+          <a href={validateUrl(portfolioURL)} target="_blank">
+            {removeHttp(portfolioURL)}
           </a>
         </li>
       )}
 
-      {onlineProfiles.linkedInURL !== "" && (
+      {linkedInURL !== "" && (
         <li>
           <b>LinkedIn: </b>
-          <a href={onlineProfiles.linkedInURL} target="_blank">
-            {removeHttp(onlineProfiles.linkedInURL)}
+          <a href={linkedInURL} target="_blank">
+            {removeHttp(linkedInURL)}
           </a>
         </li>
       )}
 
-      {onlineProfiles.gitHubURL !== "" && (
+      {gitHubURL !== "" && (
         <li>
           <b>GitHub: </b>
-          <a href={onlineProfiles.gitHubURL} target="_blank">
-            {removeHttp(onlineProfiles.gitHubURL)}
+          <a href={gitHubURL} target="_blank">
+            {removeHttp(gitHubURL)}
           </a>
         </li>
       )}
