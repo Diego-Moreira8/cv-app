@@ -121,7 +121,7 @@ p {
 
 @media screen {
   #app {
-    display: block;
+    display: flex;
   }
   #printable {
     display: none;
