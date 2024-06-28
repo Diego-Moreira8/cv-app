@@ -1,6 +1,22 @@
 import { v4 as uuid } from "uuid";
 import { CVAction } from "./actions";
-import { CVData, ExpType } from "./types";
+import { CVData, ExpType, Experience } from "./types";
+
+function sortExperiences(a: Experience, b: Experience) {
+  const expA = { month: a.startMonth, year: a.startYear };
+  const expB = { month: b.startMonth, year: b.startYear };
+  const sameYear = expA.year === expB.year;
+
+  if ((sameYear && expA.month < expB.month) || expA.year < expB.year) {
+    return 1;
+  }
+
+  if ((sameYear && expA.month > expB.month) || expA.year > expB.year) {
+    return -1;
+  }
+
+  return 0;
+}
 
 function cvReducer(state: CVData, action: CVAction) {
   switch (action.type) {
@@ -10,12 +26,14 @@ function cvReducer(state: CVData, action: CVAction) {
         personalData: { ...state.personalData, name: action.value },
       };
     }
+
     case "SET_LOCATION": {
       return {
         ...state,
         personalData: { ...state.personalData, location: action.value },
       };
     }
+
     case "SET_PHONE": {
       return {
         ...state,
@@ -25,6 +43,7 @@ function cvReducer(state: CVData, action: CVAction) {
         },
       };
     }
+
     case "SET_IS_WHATSAPP": {
       return {
         ...state,
@@ -34,18 +53,21 @@ function cvReducer(state: CVData, action: CVAction) {
         },
       };
     }
+
     case "SET_EMAIL": {
       return {
         ...state,
         personalData: { ...state.personalData, email: action.value },
       };
     }
+
     case "SET_PORTFOLIO_URL": {
       return {
         ...state,
         onlineProfiles: { ...state.onlineProfiles, portfolioURL: action.value },
       };
     }
+
     case "SET_GITHUB_USERNAME": {
       return {
         ...state,
@@ -55,6 +77,7 @@ function cvReducer(state: CVData, action: CVAction) {
         },
       };
     }
+
     case "SET_LINKEDIN_USERNAME": {
       return {
         ...state,
@@ -64,12 +87,14 @@ function cvReducer(state: CVData, action: CVAction) {
         },
       };
     }
+
     case "SET_PROFESSIONAL_OBJECTIVE": {
       return {
         ...state,
         professionalObjective: action.value,
       };
     }
+
     case "ADD_TECH": {
       const updatedTechs = {
         ...state,
@@ -87,21 +112,28 @@ function cvReducer(state: CVData, action: CVAction) {
 
       return updatedTechs;
     }
+
     case "REMOVE_TECH_BY_ID": {
       const updatedTechs = state.techs.filter((t) => t.id !== action.value);
       return { ...state, techs: updatedTechs };
     }
+
     case "ADD_EXPERIENCE": {
       const expTypeKey =
         action.expType === ExpType.Academic
           ? "academicExps"
           : "professionalExps";
 
-      return {
+      const updatedExps = {
         ...state,
         [expTypeKey]: [...state[expTypeKey], action.value],
       };
+
+      updatedExps[expTypeKey].sort(sortExperiences);
+
+      return updatedExps;
     }
+
     case "EDIT_EXPERIENCE": {
       const expTypeKey =
         action.expType === ExpType.Academic
@@ -112,11 +144,14 @@ function cvReducer(state: CVData, action: CVAction) {
         exp.id === action.value.id ? action.value : exp
       );
 
+      updatedExps.sort(sortExperiences);
+
       return {
         ...state,
         [expTypeKey]: updatedExps,
       };
     }
+
     case "REMOVE_EXPERIENCE": {
       const expTypeKey =
         action.expType === ExpType.Academic
@@ -131,4 +166,5 @@ function cvReducer(state: CVData, action: CVAction) {
     }
   }
 }
+
 export { cvReducer };

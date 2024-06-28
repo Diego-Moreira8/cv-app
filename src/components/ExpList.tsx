@@ -42,6 +42,19 @@ function ExpList({ expType, expGroupDispatch }: ExpListProps) {
         </p>
       )}
 
+      {experiences.length > 0 && (
+        <>
+          <hr />
+
+          <p>
+            <i>
+              Lista de experiências classificadas por data de início, da mais
+              recente para a mais antiga.
+            </i>
+          </p>
+        </>
+      )}
+
       <ul>
         {experiences.map((exp) => (
           <li key={exp.id}>

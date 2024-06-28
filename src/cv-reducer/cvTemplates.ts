@@ -53,7 +53,7 @@ const MY_CV: CVData = {
     "Busco uma oportunidade de emprego como Desenvolvedor, onde eu possa aplicar e aprimorar meus conhecimentos em programação, aprender novas tecnologias e contribuir para projetos inovadores.",
   professionalExps: [
     {
-      id: "1",
+      id: uuid(),
       title: "Técnico em Informática",
       location: "Faculdade Una",
       inProgress: true,
@@ -65,7 +65,7 @@ const MY_CV: CVData = {
         "Presto suporte técnico a colaboradores e alunos, gerencio os equipamentos de informática do campus e auxilio outros setores na implementação de melhorias. Durante minha experiência, adquiri conhecimentos em manutenção de computadores, realizei instalações de equipamentos de rede e aperfeiçoei a documentação do setor.",
     },
     {
-      id: "2",
+      id: uuid(),
       title: "Auxiliar em Compras",
       location: "Construtora Nóbrega Pimenta",
       startMonth: 8,
@@ -76,7 +76,7 @@ const MY_CV: CVData = {
         "Nessa função, auxiliava o comprador no lançamento de notas fiscais para pagamento.",
     },
     {
-      id: "3",
+      id: uuid(),
       title: "Aprendiz em Suporte em Informática",
       location: "Faculdade Una",
       startMonth: 6,
@@ -87,7 +87,7 @@ const MY_CV: CVData = {
         "Minha segunda experiência como Jovem Aprendiz. Realizava manutenção em equipamentos de informática e prestava suporte técnico aos colaboradores e alunos do campus.",
     },
     {
-      id: "4",
+      id: uuid(),
       title: "Aprendiz em Compras",
       location: "Anglo American",
       startMonth: 5,
