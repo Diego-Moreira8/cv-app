@@ -45,8 +45,8 @@ button {
   font-weight: bold;
 
   cursor: pointer;
-
   transition: transform 100ms;
+  -webkit-tap-highlight-color: transparent;
 }
 button:active {
   transform: scale(0.95);
