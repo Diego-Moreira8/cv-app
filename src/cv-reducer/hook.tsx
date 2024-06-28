@@ -1,5 +1,11 @@
-import { ReactNode, createContext, useContext, useReducer } from "react";
-import { MY_CV } from "./cvTemplates";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+} from "react";
+import { EMPTY_CV } from "./cvTemplates";
 import { cvReducer } from "./reducer";
 import { CVData } from "./types";
 import { CVAction } from "./actions";
@@ -10,7 +16,14 @@ const CVDispatchContext = createContext<React.Dispatch<CVAction> | undefined>(
 );
 
 function useCVReducer() {
-  const [cvState, cvDispatch] = useReducer(cvReducer, MY_CV);
+  const storedCV = localStorage.getItem("userCV");
+  const initialState = storedCV ? JSON.parse(storedCV) : EMPTY_CV;
+  const [cvState, cvDispatch] = useReducer(cvReducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("userCV", JSON.stringify(cvState));
+  }, [cvState]);
+
   return { cvState, cvDispatch };
 }
 
