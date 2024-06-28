@@ -38,20 +38,42 @@ button {
   border: 1px solid grey;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
+
+  background-color: #e9e9e9;
   font-family: inherit;
   font-size: 1rem;
-  cursor: pointer;
   font-weight: bold;
+
+  cursor: pointer;
+
+  transition: transform 100ms;
+}
+button:active {
+  transform: scale(0.95);
+}
+button:hover,
+button:focus {
+  background-color: #f6f6f6;
 }
 button.ok {
+  background-color: darkgreen;
+  border: 1px solid darkgreen;
+  color: white;
+}
+button.ok:hover,
+button.ok:focus {
   background-color: green;
   border: 1px solid green;
-  color: white;
 }
 button.danger {
   background-color: darkred;
   border: 1px solid darkred;
   color: white;
+}
+button.danger:hover,
+button.danger:focus {
+  background-color: #c80000;
+  border: 1px solid #c80000;
 }
 button:disabled {
   opacity: 0.5;
