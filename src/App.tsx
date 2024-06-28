@@ -3,6 +3,7 @@ import { Header } from "./components/Header";
 import { CVForms } from "./components/CVForms";
 import { Footer } from "./components/Footer";
 import styles from "./styles/App.module.css";
+import { PrintButton } from "./components/PrintButton";
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
     <div className={styles.app} id="app">
       <Header />
       <CVForms />
+      <PrintButton />
       <Footer />
     </div>
   );

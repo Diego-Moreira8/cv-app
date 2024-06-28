@@ -1,9 +1,15 @@
 .footer {
   margin: 0;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem 6rem 1rem;
   text-align: center;
 }
 
 .footer > a {
   color: rgb(2, 94, 160);
+}
+
+@media (min-width: 600px) {
+  .footer {
+    padding-bottom: 2rem;
+  }
 }

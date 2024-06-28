@@ -1,0 +1,26 @@
+.button {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --size: 3.5rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: var(--size);
+  border: none;
+
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+
+  transition: transform 150ms;
+}
+.button:hover {
+  transform: scale(1.1);
+}
+
+.button > span {
+  font-size: 2.25rem;
+}
