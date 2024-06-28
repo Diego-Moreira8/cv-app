@@ -10,5 +10,6 @@
 }
 
 .checkboxRow > label {
+  width: max-content;
   padding: 0.2rem 0 0 0.5rem;
 }
