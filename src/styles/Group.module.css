@@ -5,21 +5,41 @@
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
 }
 
-.headerButton {
+.headerButton,
+.headerButtonActive {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+
   width: 100%;
-  background-color: rgb(180, 205, 218);
+
+  --bgc: #b4cdda;
+  background-color: var(--bgc);
+
   margin: 0;
   border: none;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 1rem;
   padding: 1rem 1.5rem;
+
   text-align: left;
+}
+.headerButtonActive {
+  border-radius: 1rem 1rem 0 0;
 }
 .headerButton:hover {
   background-color: rgb(223, 223, 223);
+}
+.headerButton:active,
+.headerButtonActive:active {
+  transform: scale(1);
+}
+.headerButton:focus {
+  background-color: var(--bgc);
+}
+
+.indicatorActive {
+  transform: rotate(180deg);
 }
 
 .content {
