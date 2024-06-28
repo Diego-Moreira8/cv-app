@@ -8,6 +8,7 @@ import { yearStrToNumber } from "../utils/yearStrToNumber";
 import { ExpType } from "../cv-reducer/types";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import { InputNames, useExperience } from "../hooks/useExperience";
+import { useConfirmation } from "../hooks/useConfirmation";
 import styles from "../styles/ExpForm.module.css";
 
 type ExpFormProps = {
@@ -19,6 +20,7 @@ type ExpFormProps = {
 function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
   const cvState = useCVState();
   const cvDispatch = useCVDispatch();
+  const { ConfirmationModal, confirmAction } = useConfirmation();
 
   const { formDispatch, formState } = useExperience(
     expType,
@@ -31,7 +33,7 @@ function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
   const [startYearError, setStartYearError] = useState("");
   const [endYearError, setEndYearError] = useState("");
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setStartYearError("");
@@ -62,6 +64,10 @@ function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
     }
 
     if (expToEditId) {
+      const confirmed = await confirmAction("Deseja salvar as modificações?");
+
+      if (!confirmed) return;
+
       cvDispatch({
         type: "EDIT_EXPERIENCE",
         expType: expType,
@@ -78,8 +84,17 @@ function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
     expGroupDispatch({ type: "CLOSE_FORM" });
   }
 
+  async function handleCancel() {
+    const confirmed = await confirmAction(
+      "Tem certeza que deseja cancelar? Todos os dados serão perdidos!"
+    );
+    if (confirmed) expGroupDispatch({ type: "CLOSE_FORM" });
+  }
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
+      {ConfirmationModal()}
+
       <h3>
         {isAcademic ? "Adicionar curso" : "Adicionar experiência profissional"}
       </h3>
@@ -192,10 +207,7 @@ function ExpForm({ expType, expToEditId, expGroupDispatch }: ExpFormProps) {
       />
 
       <div className={styles.buttons}>
-        <button
-          type="button"
-          onClick={() => expGroupDispatch({ type: "CLOSE_FORM" })}
-        >
+        <button type="button" onClick={handleCancel}>
           Cancelar
         </button>
         <button className="ok" type="submit">

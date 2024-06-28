@@ -2,6 +2,7 @@ import { ExpGroupActions } from "./ExpGroup";
 import { ExpPeriod } from "./ExpPeriod";
 import { ExpType } from "../cv-reducer/types";
 import { useCVDispatch, useCVState } from "../cv-reducer/hook";
+import { useConfirmation } from "../hooks/useConfirmation";
 import styles from "../styles/ExpList.module.css";
 
 type ExpListProps = {
@@ -12,6 +13,7 @@ type ExpListProps = {
 function ExpList({ expType, expGroupDispatch }: ExpListProps) {
   const cvState = useCVState();
   const cvDispatch = useCVDispatch();
+  const { ConfirmationModal, confirmAction } = useConfirmation();
 
   const experiences =
     expType === ExpType.Academic
@@ -26,12 +28,20 @@ function ExpList({ expType, expGroupDispatch }: ExpListProps) {
     expGroupDispatch({ type: "EDIT_EXP_BY_ID", value: id });
   }
 
-  function handleDelete(id: string) {
-    cvDispatch({ type: "REMOVE_EXPERIENCE", expType: expType, value: id });
+  async function handleDelete(id: string) {
+    const confirmed = await confirmAction(
+      "Tem certeza que deseja apagar esta experiência?"
+    );
+
+    if (confirmed) {
+      cvDispatch({ type: "REMOVE_EXPERIENCE", expType: expType, value: id });
+    }
   }
 
   return (
     <div className={styles.expList}>
+      {ConfirmationModal()}
+
       <button className="ok" type="button" onClick={handleAdd}>
         Adicionar
       </button>

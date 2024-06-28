@@ -1,5 +1,5 @@
 import { Group } from "./Group";
-import { FormWrapper } from "./FromWrapper";
+import { FormWrapper } from "./FormWrapper";
 import { Textarea } from "./Textarea";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import { useConfirmation } from "../hooks/useConfirmation";

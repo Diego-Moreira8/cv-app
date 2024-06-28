@@ -1,5 +1,5 @@
 import { Group } from "./Group";
-import { FormWrapper } from "./FromWrapper";
+import { FormWrapper } from "./FormWrapper";
 import { useCVState, useCVDispatch } from "../cv-reducer/hook";
 import { Input } from "./Input";
 
