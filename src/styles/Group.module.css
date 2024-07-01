@@ -14,7 +14,7 @@
 
   width: 100%;
 
-  --bgc: #b4cdda;
+  --bgc: #a9c2cf;
   background-color: var(--bgc);
 
   margin: 0;
@@ -27,11 +27,13 @@
 .headerButtonActive {
   border-radius: 1rem 1rem 0 0;
 }
-.headerButton:hover {
-  background-color: rgb(223, 223, 223);
+.headerButton:hover,
+.headerButtonActive:hover {
+  background-color: #a0c7dc;
 }
 .headerButton:active,
 .headerButtonActive:active {
+  background-color: var(--bgc);
   transform: scale(1);
 }
 .headerButton:focus {
