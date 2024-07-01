@@ -36,11 +36,12 @@ function ExpGroup({ expType }: ExpGroupProps) {
 
   return (
     <Group
-      title={
-        expType === ExpType.Academic
-          ? "Formação acadêmica"
-          : "Experiências profissionais"
-      }
+      {...(expType === ExpType.Academic
+        ? { id: "formacao-academica", title: "Formação acadêmica" }
+        : {
+            id: "experiencias-profissionais",
+            title: "Experiências profissionais",
+          })}
     >
       {expGroupState.formOpen ? (
         <ExpForm

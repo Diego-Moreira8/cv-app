@@ -9,7 +9,7 @@ function OnlineProfilesForm() {
   const { portfolioURL, gitHubURL, linkedInURL } = cvState.onlineProfiles;
 
   return (
-    <Group title="Perfis online">
+    <Group id="perfis-online" title="Perfis online">
       <FormWrapper>
         <p>Copie seus links e cole-os nos campos abaixo.</p>
 

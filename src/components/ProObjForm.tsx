@@ -41,7 +41,7 @@ function ProObjForm() {
   }
 
   return (
-    <Group title="Objetivo profissional">
+    <Group id="objetivo-profissional" title="Objetivo profissional">
       <FormWrapper>
         {ConfirmationModal()}
 

@@ -4,7 +4,7 @@ import { TechsList } from "./TechsList";
 
 function Techs() {
   return (
-    <Group title="Tecnologias">
+    <Group id="tecnologias" title="Tecnologias">
       <AddTechForm />
       <hr />
       <TechsList />

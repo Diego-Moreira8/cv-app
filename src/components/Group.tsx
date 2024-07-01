@@ -1,17 +1,13 @@
-import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { useActiveGroup, useSetActiveGroup } from "../hooks/useActiveGroup";
 import styles from "../styles/Group.module.css";
 
 type GroupProps = {
+  id: string;
   title: string;
   children: React.ReactNode;
 };
 
-function Group({ title, children }: GroupProps) {
-  const [id, setId] = useState("");
-  useEffect(() => setId(uuid()), []);
-
+function Group({ id, title, children }: GroupProps) {
   const activeGroupId = useActiveGroup();
   const setActiveGroup = useSetActiveGroup();
 

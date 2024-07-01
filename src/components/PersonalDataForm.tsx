@@ -13,7 +13,7 @@ function PersonalDataForm() {
   const { name, location, phone, email } = cvState.personalData;
 
   return (
-    <Group title="Dados pessoais">
+    <Group id="dados-pessoais" title="Dados pessoais">
       <FormWrapper>
         <Input
           label="Nome completo:"
