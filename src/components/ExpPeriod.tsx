@@ -20,7 +20,7 @@ function ExpPeriod({
   } else if (lessThanOneMonth) {
     Period = (
       <>
-        Em {months[startMonth - 1]}/{startYear}
+        Em {months[startMonth - 1].toLowerCase()}/{startYear}
       </>
     );
   } else {
