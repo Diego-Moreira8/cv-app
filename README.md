@@ -1,7 +1,7 @@
 # Meu Currículo
 
 Este é um Web App que permite aos usuários gerar currículos imprimíveis. Os usuários podem preencher os formulários com suas informações pessoais, educacionais e profissionais, e o aplicativo gera um currículo formatado que pode ser impresso ou salvo como PDF.
-O projeto foi proposto pelo site [The Odin Project](https://www.theodinproject.com). Acesse o site do projeto em []() ou siga os passos de instalação abaixo.
+O projeto foi proposto pelo site [The Odin Project](https://www.theodinproject.com). Acesse o site do projeto em [diego-moreira8.github.io/cv-app](https://diego-moreira8.github.io/cv-app/) ou siga os passos de instalação abaixo.
 
 ![Captura de tela do projeto](./src/images/project-screenshot.png)
 
