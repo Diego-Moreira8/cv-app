@@ -10,8 +10,11 @@ function PrintButton() {
       type="button"
       className={`${style.button} ok`}
       onClick={triggerPrint}
+      aria-label="Imprimir"
     >
-      <span className="material-symbols-outlined">print</span>
+      <span className="material-symbols-outlined" aria-hidden="true">
+        print
+      </span>
     </button>
   );
 }

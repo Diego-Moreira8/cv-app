@@ -6,11 +6,14 @@ import { ExpGroup } from "./ExpGroup";
 import { ActiveGroupProvider } from "../hooks/useActiveGroup";
 import { ExpType } from "../cv-reducer/types";
 import styles from "../styles/CVForms.module.css";
+import { AppInstructions } from "./AppInstructions";
 
 function CVForms() {
   return (
     <ActiveGroupProvider>
       <div className={styles.main}>
+        <AppInstructions />
+
         <PersonalDataForm />
         <OnlineProfilesForm />
         <ProObjForm />
