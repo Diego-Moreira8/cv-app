@@ -1,17 +1,38 @@
 import { Experience } from "../cv-reducer/types";
 import { months } from "../utils/monthsArray";
 
-function ExpPeriod({ exp }: { exp: Experience }) {
-  return exp.inProgress ? (
-    <>
-      Desde {months[exp.startMonth - 1].toLowerCase()}/{exp.startYear}
-    </>
-  ) : (
-    <>
-      De {months[exp.startMonth - 1].toLowerCase()}/{exp.startYear} até{" "}
-      {months[exp.endMonth - 1].toLowerCase()}/{exp.endYear}
-    </>
-  );
+type ExpPeriodProps = {
+  exp: Experience;
+};
+
+function ExpPeriod({
+  exp: { inProgress, startYear, startMonth, endYear, endMonth },
+}: ExpPeriodProps) {
+  let Period;
+  const lessThanOneMonth = startYear === endYear && startMonth === endMonth;
+
+  if (inProgress) {
+    Period = (
+      <>
+        Desde {months[startMonth - 1].toLowerCase()}/{startYear}
+      </>
+    );
+  } else if (lessThanOneMonth) {
+    Period = (
+      <>
+        Em {months[startMonth - 1]}/{startYear}
+      </>
+    );
+  } else {
+    Period = (
+      <>
+        De {months[startMonth - 1].toLowerCase()}/{startYear} até{" "}
+        {months[endMonth - 1].toLowerCase()}/{endYear}
+      </>
+    );
+  }
+
+  return Period;
 }
 
 export { ExpPeriod };
